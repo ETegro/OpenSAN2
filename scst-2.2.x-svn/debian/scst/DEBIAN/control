@@ -1,0 +1,10 @@
+Package: scst
+Version: 2.2.x-svn-1
+Architecture: amd64
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Installed-Size: 14368
+Depends: linux-image-3.13.0-12-generic
+Section: kernel
+Priority: optional
+Homepage: http://scst.sourceforge.net/
+Description: The generic SCSI target subsystem for Linux (SCST) allows creation of sophisticated storage devices from any Linux box. Those devices can provide advanced functionality, like replication, thin provisioning, deduplication, high availability, automatic backup, etc. Another class of such devices are Virtual Tape Libraries (VTL) as well as other disk-based backup solutions.
