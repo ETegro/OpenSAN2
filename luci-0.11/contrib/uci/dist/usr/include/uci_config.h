@@ -1,4 +1,0 @@
-#define UCI_PREFIX "/usr"
-#define UCI_PLUGIN_SUPPORT 1
-#undef UCI_DEBUG
-#undef UCI_DEBUG_TYPECAST
