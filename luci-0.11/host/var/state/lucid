@@ -1,0 +1,6 @@
+lucid.http.status=started
+lucid.https.status=error
+lucid.https.error=Encryption requested, but no TLS context given
+lucid.rpc.status=started
+lucid.splashr.status=started
+lucid.main.pid=28569
