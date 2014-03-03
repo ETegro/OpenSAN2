@@ -1,0 +1,4 @@
+luci-0.11/.running-sdk
+luci-0.11/contrib/uci/series
+luci-0.11/contrib/uhttpd/uhttpd-src/
+luci-0.11/modules/admin-full/src/luci-bwc
