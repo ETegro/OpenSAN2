@@ -34,6 +34,7 @@ clean:
 	rm -f .running-sdk
 	rm -rf docs
 	for i in $(MODULES); do make -C$$i clean; done
+	rm -rf ./host/
 
 
 host: build hostcopy
