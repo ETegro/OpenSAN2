@@ -22,6 +22,9 @@ gccbuild:
 		}; \
 	done
 
+astor2:
+	cp -pRv ./astor2/* ./host/
+
 luabuild: i18nbuild
 	for i in $(MODULES); do HOST=$(realpath host) \
 		SDK="$(shell test -f .running-sdk && echo 1)" make -C$$i luabuild; done
@@ -65,6 +68,7 @@ runhttpd: hostenv
 
 runuhttpd: hostenv
 	cp $(realpath build)/luci.cgi $(realpath host)/www/cgi-bin/luci
+	cp -pRv $(realpath astor2)/* ./host/
 	build/hostenv.sh $(realpath host) $(LUA_MODULEDIR) $(LUA_LIBRARYDIR) "$(realpath host)/usr/sbin/uhttpd -p 8080 -h $(realpath host)/www -f"
 
 runlua: hostenv
