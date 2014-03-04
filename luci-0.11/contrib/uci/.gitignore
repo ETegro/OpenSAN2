@@ -1,4 +1,3 @@
-uci-*
 uci.git
 *.tar.gz
 patches/series
