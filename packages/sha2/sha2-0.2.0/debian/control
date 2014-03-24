@@ -1,0 +1,13 @@
+Source: sha2
+Priority: optional
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), liblua5.1-0-dev, luarocks
+Standards-Version: 3.9.4
+Section: libs
+Homepage: https://code.google.com/p/sha2/
+
+Package: lua5.1-lib-sha
+Section: libs
+Architecture: amd64
+Depends: lua5.1
+Description: SHA2 crypt LUA library
