@@ -1,0 +1,4 @@
+420c346376e6a38e0f56f934e86222ae  /opt/src/build_nfs/sha2/lua-lib-sha2-0.2.0/usr/lib/lua/sha2.so
+7d8372aeffac0c159e6f880bb3798532  /opt/src/build_nfs/sha2/lua-lib-sha2-0.2.0/usr/lib/lua/hmac/md5.lua
+b24350a535f91e3ae9289c798ad37354  /opt/src/build_nfs/sha2/lua-lib-sha2-0.2.0/usr/lib/lua/hmac/sha2.lua
+1f8a1ebd7e4c30cea1409b2f48530717  /opt/src/build_nfs/sha2/lua-lib-sha2-0.2.0/usr/lib/lua/hmac.lua

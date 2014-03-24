@@ -1,0 +1,5 @@
+sha2 (0.2.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- root <root@unknown>  Fri, 14 Mar 2014 11:02:55 +0400
