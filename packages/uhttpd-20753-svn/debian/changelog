@@ -1,0 +1,5 @@
+uhttpd (1.0-svn-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Denia a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>  Tue, 11 Mar 2014 14:43:15 +0400

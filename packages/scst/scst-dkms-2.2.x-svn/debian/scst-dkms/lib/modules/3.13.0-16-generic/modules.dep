@@ -1,0 +1,10 @@
+extra/scst.ko:
+extra/dev_handlers/scst_cdrom.ko: extra/scst.ko
+extra/dev_handlers/scst_vdisk.ko: extra/scst.ko
+extra/dev_handlers/scst_user.ko: extra/scst.ko
+extra/dev_handlers/scst_changer.ko: extra/scst.ko
+extra/dev_handlers/scst_modisk.ko: extra/scst.ko
+extra/dev_handlers/scst_disk.ko: extra/scst.ko
+extra/dev_handlers/scst_processor.ko: extra/scst.ko
+extra/dev_handlers/scst_raid.ko: extra/scst.ko
+extra/dev_handlers/scst_tape.ko: extra/scst.ko

@@ -1,0 +1,24 @@
+Package: lighttpd-opensan-mod-webdav
+Source: lighttpd
+Version: 1.4.33-1+nmu2ubuntu2
+Architecture: amd64
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Installed-Size: 22
+Depends: lighttpd-opensan (= 1.4.33-1+nmu2ubuntu2)
+Section: httpd
+Priority: optional
+Homepage: http://lighttpd.net/
+Description: WebDAV module for lighttpd
+ The WebDAV module is a very minimalistic implementation of RFC 2518.
+ Minimalistic means that not all operations are implemented yet.
+ .
+ Currently supports:
+  GET
+  POST
+  HEAD
+  PROPFIND
+  OPTIONS
+  MKCOL
+  DELETE
+  PUT
+Original-Maintainer: Debian lighttpd maintainers <pkg-lighttpd-maintainers@lists.alioth.debian.org>

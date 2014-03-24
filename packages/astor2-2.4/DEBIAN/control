@@ -1,0 +1,9 @@
+Package: astor2
+Version: 2.4.2
+Priority: optional
+Section: libs
+Homepage: http://www.opensan.org
+Architecture: all
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Depends: lua5.1, mdadm, lvm2, lighttpd-opensan, heartbeat
+Description: SAN control and monitoring application used in OpenSAN.

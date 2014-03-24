@@ -1,0 +1,10 @@
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/scst.ko
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/dev_handlers/scst_cdrom.ko
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/dev_handlers/scst_changer.ko
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/dev_handlers/scst_disk.ko
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/dev_handlers/scst_modisk.ko
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/dev_handlers/scst_tape.ko
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/dev_handlers/scst_vdisk.ko
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/dev_handlers/scst_raid.ko
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/dev_handlers/scst_processor.ko
+kernel//opt/src/build_nfs/scst/scst-2.2.x-svn/scst/src/dev_handlers/scst_user.ko

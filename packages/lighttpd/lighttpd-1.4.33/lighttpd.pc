@@ -1,0 +1,14 @@
+# lighttpd pkg-config file
+
+prefix=/usr
+exec_prefix=${prefix}
+libdir=/usr/lib/lighttpd
+includedir=${prefix}/include
+
+Name: lighttpd
+Description: lighttpd
+Version: 1.4.33
+Requires:
+Conflicts:
+Libs:
+Cflags: -I${includedir} -DHAVE_CONFIG_H -D_FORTIFY_SOURCE=2 -D_REENTRANT -D__EXTENSIONS__ -DOPENSSL_NO_KRB5  -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES

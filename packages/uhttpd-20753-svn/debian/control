@@ -1,0 +1,12 @@
+Source: uhttpd
+Section: admin
+Priority: optional
+Maintainer: Denia a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+Homepage: http://wiki.openwrt.org/doc/uci/uhttpd
+
+Package: uhttpd
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Small web server from OpenWRT

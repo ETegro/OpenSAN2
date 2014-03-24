@@ -1,0 +1,5 @@
+cyassl (2.9.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Denia a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>  Tue, 11 Mar 2014 14:03:27 +0400

@@ -1,0 +1,1 @@
+cmd_/opt/src/build_nfs/build_all/scst-2.2.x-svn/scst_local/built-in.o :=  rm -f /opt/src/build_nfs/build_all/scst-2.2.x-svn/scst_local/built-in.o; ar rcsD /opt/src/build_nfs/build_all/scst-2.2.x-svn/scst_local/built-in.o

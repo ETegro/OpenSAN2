@@ -1,0 +1,5 @@
+build-dev-package.patch
+cve-2013-4508.patch
+cve-2013-4559.patch
+cve-2013-4560.patch
+add-lighttpd.pc-configure.patch

@@ -1,0 +1,9 @@
+Package: uhttpd
+Version: 1.0-svn-1
+Architecture: amd64
+Maintainer: Denia a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Installed-Size: 3
+Section: admin
+Priority: optional
+Homepage: http://wiki.openwrt.org/doc/uci/uhttpd
+Description: Small web server from OpenWRT

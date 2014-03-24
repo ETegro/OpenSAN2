@@ -1,0 +1,13 @@
+Source: cyassl
+Priority: optional
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libbison-dev
+Standards-Version: 3.9.4
+Section: libs
+Homepage: http://yassl.com/
+
+Package: cyassl-2.9.0
+Section: libs
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: The embedded SSL library

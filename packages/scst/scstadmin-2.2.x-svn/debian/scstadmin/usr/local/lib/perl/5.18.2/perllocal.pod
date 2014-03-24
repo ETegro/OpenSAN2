@@ -1,0 +1,22 @@
+=head2 Wed Mar 19 14:49:24 2014: C<Module> L<SCST-SCST|SCST-SCST>
+
+=over 4
+
+=item *
+
+C<installed into: /usr/local/share/perl/5.18.2>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.9.10>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+

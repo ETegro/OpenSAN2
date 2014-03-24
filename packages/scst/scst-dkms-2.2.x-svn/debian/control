@@ -1,0 +1,22 @@
+Source: scst-dkms
+Section: unknown
+Priority: optional
+Maintainer: Denia a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), bzip2
+Standards-Version: 3.9.4
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: git://git.debian.org/collab-maint/scst-dkms.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/scst-dkms.git;a=summary
+
+Package: scst-dkms-utils
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description> <insert long description, indented with spaces>
+
+Package: scst-dkms-source
+Architecture: all
+Depends: module-assistant, debhelper (>= 7), make, bzip2
+Description: source for the scst-dkms driver.
+ This package provides the source code for the scst-dkms kernel modules.
+ The scst-dkms package is also required in order to make use of these
+ modules. Kernel source or headers are required to compile these modules.

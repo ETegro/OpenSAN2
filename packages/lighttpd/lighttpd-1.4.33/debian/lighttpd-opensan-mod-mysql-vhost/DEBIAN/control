@@ -1,0 +1,16 @@
+Package: lighttpd-opensan-mod-mysql-vhost
+Source: lighttpd
+Version: 1.4.33-1+nmu2ubuntu2
+Architecture: amd64
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Installed-Size: 22
+Depends: lighttpd-opensan (= 1.4.33-1+nmu2ubuntu2)
+Section: httpd
+Priority: optional
+Homepage: http://lighttpd.net/
+Description: MySQL-based virtual host configuration for lighttpd
+ This package contains the myqsl_vhost module for lighttpd. With
+ this module, it is possible to write the configuration for virtual
+ hosts into a MySQL table instead of including it in the lighttpd
+ configuration file.
+Original-Maintainer: Debian lighttpd maintainers <pkg-lighttpd-maintainers@lists.alioth.debian.org>

@@ -1,0 +1,2 @@
+/opt/src/build_nfs/build_all/scst-2.2.x-svn/scst_local/scst_local.ko
+/opt/src/build_nfs/build_all/scst-2.2.x-svn/scst_local/scst_local.o
