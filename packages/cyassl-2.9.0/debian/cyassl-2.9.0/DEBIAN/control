@@ -1,0 +1,11 @@
+Package: cyassl-2.9.0
+Source: cyassl
+Version: 2.9.0-1
+Architecture: amd64
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Installed-Size: 609
+Depends: libc6 (>= 2.14)
+Section: libs
+Priority: optional
+Homepage: http://yassl.com/
+Description: The embedded SSL library

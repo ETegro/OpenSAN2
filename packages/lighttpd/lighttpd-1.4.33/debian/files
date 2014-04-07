@@ -1,0 +1,8 @@
+lighttpd-opensan_1.4.33-1+nmu2ubuntu2_amd64.deb httpd optional
+lighttpd-opensan-doc_1.4.33-1+nmu2ubuntu2_all.deb doc optional
+lighttpd-opensan-mod-mysql-vhost_1.4.33-1+nmu2ubuntu2_amd64.deb httpd optional
+lighttpd-opensan-mod-trigger-b4-dl_1.4.33-1+nmu2ubuntu2_amd64.deb httpd optional
+lighttpd-opensan-mod-cml_1.4.33-1+nmu2ubuntu2_amd64.deb httpd optional
+lighttpd-opensan-mod-magnet_1.4.33-1+nmu2ubuntu2_amd64.deb httpd optional
+lighttpd-opensan-mod-webdav_1.4.33-1+nmu2ubuntu2_amd64.deb httpd optional
+lighttpd-opensan-dev_1.4.33-1+nmu2ubuntu2_amd64.deb httpd optional

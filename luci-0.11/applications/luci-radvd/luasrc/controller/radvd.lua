@@ -9,7 +9,7 @@ You may obtain a copy of the License at
 
 	http://www.apache.org/licenses/LICENSE-2.0
 
-$Id: radvd.lua 9558 2012-12-18 13:58:22Z jow $
+$Id: radvd.lua 6808 2011-01-29 03:27:37Z jow $
 ]]--
 
 module("luci.controller.radvd", package.seeall)
@@ -19,7 +19,7 @@ function index()
 		return
 	end
 
-	entry({"admin", "network", "radvd"}, cbi("radvd"), _("Radvd"), 61)
+	entry({"admin", "network", "radvd"}, cbi("radvd"), "Radvd", 61).i18n = "radvd"
 	entry({"admin", "network", "radvd", "interface"}, cbi("radvd/interface"), nil).leaf = true
 	entry({"admin", "network", "radvd", "prefix"}, cbi("radvd/prefix"), nil).leaf = true
 	entry({"admin", "network", "radvd", "route"}, cbi("radvd/route"), nil).leaf = true

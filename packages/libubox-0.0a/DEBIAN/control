@@ -1,0 +1,7 @@
+Package: libubox-bin
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Version: 0.0a
+Section: libs
+Architecture: amd64
+Depends: lua5.1, ubus
+Description: The libubox library using by ubus

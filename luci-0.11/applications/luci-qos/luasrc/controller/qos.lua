@@ -9,9 +9,8 @@ You may obtain a copy of the License at
 
 	http://www.apache.org/licenses/LICENSE-2.0
 
-$Id: qos.lua 9558 2012-12-18 13:58:22Z jow $
+$Id: qos.lua 5104 2009-07-19 00:24:58Z jow $
 ]]--
-
 module("luci.controller.qos", package.seeall)
 
 function index()
@@ -19,11 +18,12 @@ function index()
 		return
 	end
 	
-	local page
-
-	page = entry({"admin", "network", "qos"}, cbi("qos/qos"), _("QoS"))
+	local page = entry({"admin", "network", "qos"}, cbi("qos/qos"), "QoS")
+	page.i18n = "qos"
 	page.dependent = true
-
-	page = entry({"mini", "network", "qos"}, cbi("qos/qosmini", {autoapply=true}), _("QoS"))
+	
+	
+	local page = entry({"mini", "network", "qos"}, cbi("qos/qosmini", {autoapply=true}), "QoS")
+	page.i18n = "qos"
 	page.dependent = true
 end

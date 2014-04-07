@@ -1,0 +1,22 @@
+Source: scst
+Section: kernel
+Priority: optional
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), bzip2 
+Standards-Version: 3.9.4
+Homepage: http://scst.sourceforge.net/
+#Vcs-Git: git://git.debian.org/collab-maint/scst.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/scst.git;a=summary
+
+Package: scst
+Architecture: amd64
+Depends: linux-generic (>= 3.13.0)
+Description: The generic SCSI target subsystem for Linux (SCST) allows creation of sophisticated storage devices from any Linux box. Those devices can provide advanced functionality, like replication, thin provisioning, deduplication, high availability, automatic backup, etc. Another class of such devices are Virtual Tape Libraries (VTL) as well as other disk-based backup solutions.
+
+Package: scst-source
+Architecture: all
+Depends: module-assistant, debhelper (>= 7), make, bzip2
+Description: source for the scst driver.
+ This package provides the source code for the scst kernel modules.
+ The scst package is also required in order to make use of these
+ modules. Kernel source or headers are required to compile these modules.

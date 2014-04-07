@@ -1,0 +1,25 @@
+MD5      test passed!
+SHA      test passed!
+SHA-256  test passed!
+HMAC-MD5 test passed!
+HMAC-SHA test passed!
+HMAC-SHA256 test passed!
+ARC4     test passed!
+DES      test passed!
+DES3     test passed!
+AES      test passed!
+RANDOM   test passed!
+RSA      test passed!
+DH       test passed!
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+sending server shutdown command: quit!
+client sent quit command: shutting down!
+9a104af3d164e37c0dabe3316f7bc35b9be5fd771a09ea1cda478d4057f0b06e  input
+9a104af3d164e37c0dabe3316f7bc35b9be5fd771a09ea1cda478d4057f0b06e  /tmp/output
+
+All tests passed!

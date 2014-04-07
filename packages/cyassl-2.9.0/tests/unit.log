@@ -1,0 +1,1130 @@
+starting unit tests...
+ Begin API Tests
+   CyaSSL_Init(): passed
+   CyaSSLv3_server_method(): passed
+   CyaSSLv3_client_method(): passed
+   CyaTLSv1_server_method(): passed
+   CyaTLSv1_client_method(): passed
+   CyaTLSv1_1_server_method(): passed
+   CyaTLSv1_1_client_method(): passed
+   CyaTLSv1_2_server_method(): passed
+   CyaTLSv1_2_client_method(): passed
+   CyaSSLv23_client_method(): passed
+   CyaSSL_CTX_new(NULL): passed
+   CyaSSL_CTX_new(method): passed
+   CyaSSL_CTX_use_certificate_file(NULL, NULL, 9999): passed
+   CyaSSL_CTX_use_certificate_file(ctx, bogusFile, SSL_FILETYPE_PEM): passed
+   CyaSSL_CTX_use_certificate_file(ctx, svrCert, 9999): passed
+   CyaSSL_CTX_use_certificate_file(ctx, svrCert, SSL_FILETYPE_PEM): passed
+   CyaSSL_CTX_use_PrivateKey_file(NULL, NULL, 9999): passed
+   CyaSSL_CTX_use_PrivateKey_file(ctx, bogusFile, SSL_FILETYPE_PEM): passed
+   CyaSSL_CTX_use_PrivateKey_file(ctx, svrKey, 9999): passed
+   CyaSSL_CTX_use_PrivateKey_file(ctx, svrKey, SSL_FILETYPE_PEM): passed
+   CyaSSL_CTX_load_verify_locations(NULL, NULL, NULL): passed
+   CyaSSL_CTX_load_verify_locations(ctx, NULL, NULL): passed
+   CyaSSL_CTX_load_verify_locations(ctx, NULL, NULL): passed
+   CyaSSL_CTX_load_verify_locations(ctx, caCert, bogusFile): passed
+   CyaSSL_CTX_load_verify_locations(ctx, caCert, 0): passed
+   CyaSSL_new(NULL) server: passed
+   CyaSSL_new(ctx_nocert) server: passed
+   CyaSSL_new(ctx) server: passed
+   CyaSSL_new(NULL) client: passed
+   CyaSSL_new(ctx_nocert) client: passed
+   CyaSSL_new(ctx) client: passed
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+   CyaSSL_Cleanup(): passed
+ End API Tests
+ Begin HASH Tests
+   MD5      test passed!
+   SHA      test passed!
+   SHA-256  test passed!
+   HMAC-MD5 test passed!
+   HMAC-SHA test passed!
+   HMAC-SHA256 test passed!
+ End HASH Tests
+ Begin Cipher Suite Tests
+starting default cipher suite tests
+notice: using default file tests/test.conf
+trying server command line[1]: SuiteTest -v 0 -l RC4-SHA 
+trying client command line[1]: SuiteTest -v 0 -l RC4-SHA 
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[2]: SuiteTest -v 0 -l RC4-SHA -N 
+trying client command line[2]: SuiteTest -v 0 -l RC4-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[3]: SuiteTest -v 0 -l RC4-SHA -d 
+trying client command line[3]: SuiteTest -v 0 -l RC4-SHA 
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[4]: SuiteTest -v 0 -l RC4-SHA -d -N 
+trying client command line[4]: SuiteTest -v 0 -l RC4-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+trying server command line[5]: SuiteTest -v 0 -l RC4-MD5 
+trying client command line[5]: SuiteTest -v 0 -l RC4-MD5 
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[6]: SuiteTest -v 0 -l RC4-MD5 -N 
+trying client command line[6]: SuiteTest -v 0 -l RC4-MD5 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[7]: SuiteTest -v 0 -l RC4-MD5 -d 
+trying client command line[7]: SuiteTest -v 0 -l RC4-MD5 
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[8]: SuiteTest -v 0 -l RC4-MD5 -d -N 
+trying client command line[8]: SuiteTest -v 0 -l RC4-MD5 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+trying server command line[9]: SuiteTest -v 0 -l DES-CBC3-SHA 
+trying client command line[9]: SuiteTest -v 0 -l DES-CBC3-SHA 
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[10]: SuiteTest -v 0 -l DES-CBC3-SHA -N 
+trying client command line[10]: SuiteTest -v 0 -l DES-CBC3-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[11]: SuiteTest -v 0 -l DES-CBC3-SHA -d 
+trying client command line[11]: SuiteTest -v 0 -l DES-CBC3-SHA 
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[12]: SuiteTest -v 0 -l DES-CBC3-SHA -d -N 
+trying client command line[12]: SuiteTest -v 0 -l DES-CBC3-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is SSLv3
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+trying server command line[13]: SuiteTest -v 1 -l RC4-SHA 
+trying client command line[13]: SuiteTest -v 1 -l RC4-SHA 
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[14]: SuiteTest -v 1 -l RC4-SHA -N 
+trying client command line[14]: SuiteTest -v 1 -l RC4-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[15]: SuiteTest -v 1 -l RC4-SHA -d 
+trying client command line[15]: SuiteTest -v 1 -l RC4-SHA 
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[16]: SuiteTest -v 1 -l RC4-SHA -d -N 
+trying client command line[16]: SuiteTest -v 1 -l RC4-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+trying server command line[17]: SuiteTest -v 1 -l RC4-MD5 
+trying client command line[17]: SuiteTest -v 1 -l RC4-MD5 
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[18]: SuiteTest -v 1 -l RC4-MD5 -N 
+trying client command line[18]: SuiteTest -v 1 -l RC4-MD5 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[19]: SuiteTest -v 1 -l RC4-MD5 -d 
+trying client command line[19]: SuiteTest -v 1 -l RC4-MD5 
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[20]: SuiteTest -v 1 -l RC4-MD5 -d -N 
+trying client command line[20]: SuiteTest -v 1 -l RC4-MD5 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+trying server command line[21]: SuiteTest -v 1 -l DES-CBC3-SHA 
+trying client command line[21]: SuiteTest -v 1 -l DES-CBC3-SHA 
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[22]: SuiteTest -v 1 -l DES-CBC3-SHA -N 
+trying client command line[22]: SuiteTest -v 1 -l DES-CBC3-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[23]: SuiteTest -v 1 -l DES-CBC3-SHA -d 
+trying client command line[23]: SuiteTest -v 1 -l DES-CBC3-SHA 
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[24]: SuiteTest -v 1 -l DES-CBC3-SHA -d -N 
+trying client command line[24]: SuiteTest -v 1 -l DES-CBC3-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+trying server command line[25]: SuiteTest -v 1 -l AES128-SHA 
+trying client command line[25]: SuiteTest -v 1 -l AES128-SHA 
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[26]: SuiteTest -v 1 -l AES128-SHA -N 
+trying client command line[26]: SuiteTest -v 1 -l AES128-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[27]: SuiteTest -v 1 -l AES128-SHA -d 
+trying client command line[27]: SuiteTest -v 1 -l AES128-SHA 
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[28]: SuiteTest -v 1 -l AES128-SHA -d -N 
+trying client command line[28]: SuiteTest -v 1 -l AES128-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+trying server command line[29]: SuiteTest -v 1 -l AES256-SHA 
+trying client command line[29]: SuiteTest -v 1 -l AES256-SHA 
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[30]: SuiteTest -v 1 -l AES256-SHA -N 
+trying client command line[30]: SuiteTest -v 1 -l AES256-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[31]: SuiteTest -v 1 -l AES256-SHA -d 
+trying client command line[31]: SuiteTest -v 1 -l AES256-SHA 
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[32]: SuiteTest -v 1 -l AES256-SHA -d -N 
+trying client command line[32]: SuiteTest -v 1 -l AES256-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+trying server command line[33]: SuiteTest -v 1 -l AES128-SHA256 
+trying client command line[33]: SuiteTest -v 1 -l AES128-SHA256 
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[34]: SuiteTest -v 1 -l AES128-SHA256 -N 
+trying client command line[34]: SuiteTest -v 1 -l AES128-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[35]: SuiteTest -v 1 -l AES128-SHA256 -d 
+trying client command line[35]: SuiteTest -v 1 -l AES128-SHA256 
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[36]: SuiteTest -v 1 -l AES128-SHA256 -d -N 
+trying client command line[36]: SuiteTest -v 1 -l AES128-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+trying server command line[37]: SuiteTest -v 1 -l AES256-SHA256 
+trying client command line[37]: SuiteTest -v 1 -l AES256-SHA256 
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[38]: SuiteTest -v 1 -l AES256-SHA256 -N 
+trying client command line[38]: SuiteTest -v 1 -l AES256-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[39]: SuiteTest -v 1 -l AES256-SHA256 -d 
+trying client command line[39]: SuiteTest -v 1 -l AES256-SHA256 
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[40]: SuiteTest -v 1 -l AES256-SHA256 -d -N 
+trying client command line[40]: SuiteTest -v 1 -l AES256-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+trying server command line[41]: SuiteTest -v 2 -l RC4-SHA 
+trying client command line[41]: SuiteTest -v 2 -l RC4-SHA 
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[42]: SuiteTest -v 2 -l RC4-SHA -N 
+trying client command line[42]: SuiteTest -v 2 -l RC4-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[43]: SuiteTest -v 2 -l RC4-SHA -d 
+trying client command line[43]: SuiteTest -v 2 -l RC4-SHA 
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[44]: SuiteTest -v 2 -l RC4-SHA -d -N 
+trying client command line[44]: SuiteTest -v 2 -l RC4-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+trying server command line[45]: SuiteTest -v 2 -l RC4-MD5 
+trying client command line[45]: SuiteTest -v 2 -l RC4-MD5 
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[46]: SuiteTest -v 2 -l RC4-MD5 -N 
+trying client command line[46]: SuiteTest -v 2 -l RC4-MD5 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[47]: SuiteTest -v 2 -l RC4-MD5 -d 
+trying client command line[47]: SuiteTest -v 2 -l RC4-MD5 
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[48]: SuiteTest -v 2 -l RC4-MD5 -d -N 
+trying client command line[48]: SuiteTest -v 2 -l RC4-MD5 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+trying server command line[49]: SuiteTest -v 2 -l DES-CBC3-SHA 
+trying client command line[49]: SuiteTest -v 2 -l DES-CBC3-SHA 
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[50]: SuiteTest -v 2 -l DES-CBC3-SHA -N 
+trying client command line[50]: SuiteTest -v 2 -l DES-CBC3-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... server would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[51]: SuiteTest -v 2 -l DES-CBC3-SHA -d 
+trying client command line[51]: SuiteTest -v 2 -l DES-CBC3-SHA 
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[52]: SuiteTest -v 2 -l DES-CBC3-SHA -d -N 
+trying client command line[52]: SuiteTest -v 2 -l DES-CBC3-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+trying server command line[53]: SuiteTest -v 2 -l AES128-SHA 
+trying client command line[53]: SuiteTest -v 2 -l AES128-SHA 
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[54]: SuiteTest -v 2 -l AES128-SHA -N 
+trying client command line[54]: SuiteTest -v 2 -l AES128-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[55]: SuiteTest -v 2 -l AES128-SHA -d 
+trying client command line[55]: SuiteTest -v 2 -l AES128-SHA 
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[56]: SuiteTest -v 2 -l AES128-SHA -d -N 
+trying client command line[56]: SuiteTest -v 2 -l AES128-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+trying server command line[57]: SuiteTest -v 2 -l AES256-SHA 
+trying client command line[57]: SuiteTest -v 2 -l AES256-SHA 
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[58]: SuiteTest -v 2 -l AES256-SHA -N 
+trying client command line[58]: SuiteTest -v 2 -l AES256-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[59]: SuiteTest -v 2 -l AES256-SHA -d 
+trying client command line[59]: SuiteTest -v 2 -l AES256-SHA 
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[60]: SuiteTest -v 2 -l AES256-SHA -d -N 
+trying client command line[60]: SuiteTest -v 2 -l AES256-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+trying server command line[61]: SuiteTest -v 2 -l AES128-SHA256 
+trying client command line[61]: SuiteTest -v 2 -l AES128-SHA256 
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[62]: SuiteTest -v 2 -l AES128-SHA256 -N 
+trying client command line[62]: SuiteTest -v 2 -l AES128-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[63]: SuiteTest -v 2 -l AES128-SHA256 -d 
+trying client command line[63]: SuiteTest -v 2 -l AES128-SHA256 
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[64]: SuiteTest -v 2 -l AES128-SHA256 -d -N 
+trying client command line[64]: SuiteTest -v 2 -l AES128-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+trying server command line[65]: SuiteTest -v 2 -l AES256-SHA256 
+trying client command line[65]: SuiteTest -v 2 -l AES256-SHA256 
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[66]: SuiteTest -v 2 -l AES256-SHA256 -N 
+trying client command line[66]: SuiteTest -v 2 -l AES256-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[67]: SuiteTest -v 2 -l AES256-SHA256 -d 
+trying client command line[67]: SuiteTest -v 2 -l AES256-SHA256 
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[68]: SuiteTest -v 2 -l AES256-SHA256 -d -N 
+trying client command line[68]: SuiteTest -v 2 -l AES256-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1.1
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+trying server command line[69]: SuiteTest -v 3 -l RC4-SHA 
+trying client command line[69]: SuiteTest -v 3 -l RC4-SHA 
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[70]: SuiteTest -v 3 -l RC4-SHA -N 
+trying client command line[70]: SuiteTest -v 3 -l RC4-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[71]: SuiteTest -v 3 -l RC4-SHA -d 
+trying client command line[71]: SuiteTest -v 3 -l RC4-SHA 
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[72]: SuiteTest -v 3 -l RC4-SHA -d -N 
+trying client command line[72]: SuiteTest -v 3 -l RC4-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_SHA
+Client message: hello cyassl!
+trying server command line[73]: SuiteTest -v 3 -l RC4-MD5 
+trying client command line[73]: SuiteTest -v 3 -l RC4-MD5 
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[74]: SuiteTest -v 3 -l RC4-MD5 -N 
+trying client command line[74]: SuiteTest -v 3 -l RC4-MD5 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[75]: SuiteTest -v 3 -l RC4-MD5 -d 
+trying client command line[75]: SuiteTest -v 3 -l RC4-MD5 
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[76]: SuiteTest -v 3 -l RC4-MD5 -d -N 
+trying client command line[76]: SuiteTest -v 3 -l RC4-MD5 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_RC4_128_MD5
+Client message: hello cyassl!
+trying server command line[77]: SuiteTest -v 3 -l DES-CBC3-SHA 
+trying client command line[77]: SuiteTest -v 3 -l DES-CBC3-SHA 
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[78]: SuiteTest -v 3 -l DES-CBC3-SHA -N 
+trying client command line[78]: SuiteTest -v 3 -l DES-CBC3-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[79]: SuiteTest -v 3 -l DES-CBC3-SHA -d 
+trying client command line[79]: SuiteTest -v 3 -l DES-CBC3-SHA 
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[80]: SuiteTest -v 3 -l DES-CBC3-SHA -d -N 
+trying client command line[80]: SuiteTest -v 3 -l DES-CBC3-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is SSL_RSA_WITH_3DES_EDE_CBC_SHA
+Client message: hello cyassl!
+trying server command line[81]: SuiteTest -v 3 -l AES128-SHA 
+trying client command line[81]: SuiteTest -v 3 -l AES128-SHA 
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[82]: SuiteTest -v 3 -l AES128-SHA -N 
+trying client command line[82]: SuiteTest -v 3 -l AES128-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[83]: SuiteTest -v 3 -l AES128-SHA -d 
+trying client command line[83]: SuiteTest -v 3 -l AES128-SHA 
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[84]: SuiteTest -v 3 -l AES128-SHA -d -N 
+trying client command line[84]: SuiteTest -v 3 -l AES128-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA
+Client message: hello cyassl!
+trying server command line[85]: SuiteTest -v 3 -l AES256-SHA 
+trying client command line[85]: SuiteTest -v 3 -l AES256-SHA 
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[86]: SuiteTest -v 3 -l AES256-SHA -N 
+trying client command line[86]: SuiteTest -v 3 -l AES256-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[87]: SuiteTest -v 3 -l AES256-SHA -d 
+trying client command line[87]: SuiteTest -v 3 -l AES256-SHA 
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[88]: SuiteTest -v 3 -l AES256-SHA -d -N 
+trying client command line[88]: SuiteTest -v 3 -l AES256-SHA -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA
+Client message: hello cyassl!
+trying server command line[89]: SuiteTest -v 3 -l AES128-SHA256 
+trying client command line[89]: SuiteTest -v 3 -l AES128-SHA256 
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[90]: SuiteTest -v 3 -l AES128-SHA256 -N 
+trying client command line[90]: SuiteTest -v 3 -l AES128-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[91]: SuiteTest -v 3 -l AES128-SHA256 -d 
+trying client command line[91]: SuiteTest -v 3 -l AES128-SHA256 
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[92]: SuiteTest -v 3 -l AES128-SHA256 -d -N 
+trying client command line[92]: SuiteTest -v 3 -l AES128-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_128_CBC_SHA256
+Client message: hello cyassl!
+trying server command line[93]: SuiteTest -v 3 -l AES256-SHA256 
+trying client command line[93]: SuiteTest -v 3 -l AES256-SHA256 
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with non blocking on
+trying server command line[94]: SuiteTest -v 3 -l AES256-SHA256 -N 
+trying client command line[94]: SuiteTest -v 3 -l AES256-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+repeating test with client cert request off
+trying server command line[95]: SuiteTest -v 3 -l AES256-SHA256 -d 
+trying client command line[95]: SuiteTest -v 3 -l AES256-SHA256 
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+Server response: I hear you fa shizzle!
+repeating test with client cert request off
+repeating test with non blocking on
+trying server command line[96]: SuiteTest -v 3 -l AES256-SHA256 -d -N 
+trying client command line[96]: SuiteTest -v 3 -l AES256-SHA256 -N 
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+... client would read block
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+SSL version is TLSv1.2
+SSL cipher suite is TLS_RSA_WITH_AES_256_CBC_SHA256
+Client message: hello cyassl!
+ End Cipher Suite Tests

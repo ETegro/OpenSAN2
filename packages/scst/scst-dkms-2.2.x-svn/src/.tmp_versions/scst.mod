@@ -1,0 +1,2 @@
+/opt/src/build_nfs/scst/scst-dkms-2.2.x-svn/src/scst.ko
+/opt/src/build_nfs/scst/scst-dkms-2.2.x-svn/src/scst_main.o /opt/src/build_nfs/scst/scst-dkms-2.2.x-svn/src/scst_targ.o /opt/src/build_nfs/scst/scst-dkms-2.2.x-svn/src/scst_lib.o /opt/src/build_nfs/scst/scst-dkms-2.2.x-svn/src/scst_sysfs.o /opt/src/build_nfs/scst/scst-dkms-2.2.x-svn/src/scst_mem.o /opt/src/build_nfs/scst/scst-dkms-2.2.x-svn/src/scst_debug.o /opt/src/build_nfs/scst/scst-dkms-2.2.x-svn/src/scst_pres.o /opt/src/build_nfs/scst/scst-dkms-2.2.x-svn/src/scst_tg.o

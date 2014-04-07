@@ -1,0 +1,21 @@
+*** server.orig.c	2014-03-17 16:09:38.910379331 +0400
+--- server.c	2014-03-17 16:10:32.818238314 +0400
+***************
+*** 786,793 ****
+  
+  			if (pwd->pw_uid == 0) {
+  				log_error_write(srv, __FILE__, __LINE__, "s",
+! 						"I will not set uid to 0\n");
+! 				return -1;
+  			}
+  		}
+  
+--- 786,793 ----
+  
+  			if (pwd->pw_uid == 0) {
+  				log_error_write(srv, __FILE__, __LINE__, "s",
+! 						"I will set uid to 0\n");
+! 				//return -1;
+  			}
+  		}
+  

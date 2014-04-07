@@ -1,0 +1,8 @@
+Install lua 5.1
+Install lua sha2 module
+
+Move dirs:
+
+mv astor2 /usr/lib/lua/
+mv www /
+mv luci /usr/lib/lua/

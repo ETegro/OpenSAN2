@@ -1,0 +1,10 @@
+Package: scst-dkms-utils
+Source: scst-dkms
+Version: 2.2.x-svn-1
+Architecture: amd64
+Maintainer: Denia a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Installed-Size: 78
+Section: unknown
+Priority: optional
+Homepage: <insert the upstream URL, if relevant>
+Description: <insert up to 60 chars description> <insert long description, indented with spaces>

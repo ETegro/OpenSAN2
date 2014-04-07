@@ -1,0 +1,16 @@
+Source: luafilesystem
+Priority: optional
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+Section: libs
+Homepage: https://github.com/keplerproject/luafilesystem
+#Vcs-Git: git://git.debian.org/collab-maint/luafilesystem.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/luafilesystem.git;a=summary
+
+Package: luafilesystem-1.6.2
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

@@ -23,10 +23,6 @@ local translate = luci.i18n.translate
 local DummyValue = luci.cbi.DummyValue
 local SimpleSection = luci.cbi.SimpleSection
 
-function index()
-	return -- no-op
-end
-
 function run_processes(outnets, cmdfunc)
    i = next(outnets, nil)
    while (i) do
@@ -37,6 +33,8 @@ end
 
 function parse_output(devmap, outnets, haslink, type, mini, debug)
    local curnet = next(outnets, nil)
+
+   luci.i18n.loadc("diag_devinfo")
 
    while (curnet) do
       local output = outnets[curnet]["output"]

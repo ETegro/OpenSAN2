@@ -1,0 +1,5 @@
+luafilesystem (1.6.2-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Denia a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>  Fri, 21 Mar 2014 13:33:13 +0400

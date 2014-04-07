@@ -1,0 +1,13 @@
+Package: lighttpd-opensan-dev
+Source: lighttpd
+Version: 1.4.33-1+nmu2ubuntu2
+Architecture: amd64
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Installed-Size: 22
+Suggests: lighttpd-opensan
+Section: httpd
+Priority: optional
+Homepage: http://lighttpd.net/
+Description: Development files for lighttpd
+ This package contains the development header-files for lighttpd.
+Original-Maintainer: Debian lighttpd maintainers <pkg-lighttpd-maintainers@lists.alioth.debian.org>

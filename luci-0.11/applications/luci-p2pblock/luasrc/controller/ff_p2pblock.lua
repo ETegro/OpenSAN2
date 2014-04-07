@@ -9,12 +9,13 @@ You may obtain a copy of the License at
 
 	http://www.apache.org/licenses/LICENSE-2.0
 
-$Id: ff_p2pblock.lua 9558 2012-12-18 13:58:22Z jow $
+$Id: ff_p2pblock.lua 6903 2011-02-14 18:01:20Z soma $
 ]]--
 
 module("luci.controller.ff_p2pblock", package.seeall)
 
 function index()
+	require("luci.i18n").loadc("p2pblock")
 	entry({"admin", "network", "firewall", "p2pblock"}, cbi("luci_fw/p2pblock"),
-		_("P2P-Block"), 40)
+		luci.i18n.translate("P2P-Block"), 40)
 end

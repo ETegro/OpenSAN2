@@ -23,10 +23,6 @@ local translate = luci.i18n.translate
 local DummyValue = luci.cbi.DummyValue
 local SimpleSection = luci.cbi.SimpleSection
 
-function index()
-	return -- no-op
-end
-
 function get_params()
 
    local smapnets_uci = luci.model.uci.cursor()
@@ -94,6 +90,7 @@ function command_function(outnets, i)
 end
 
 function action_links(smapmap, mini) 
+   luci.i18n.loadc("diag_devinfo")
    s = smapmap:section(SimpleSection, "", translate("Actions")) 
    b = s:option(DummyValue, "_config", translate("Configure Scans"))
    b.value = ""

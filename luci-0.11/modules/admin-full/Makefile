@@ -2,7 +2,7 @@ include ../../build/config.mk
 include ../../build/module.mk
 include ../../build/gccconfig.mk
 
-BWC_LDFLAGS    = -ldl
+BWC_LDFLAGS    =
 BWC_CFLAGS     =
 BWC_BIN        = luci-bwc
 BWC_OBJ        = src/luci-bwc.o
@@ -11,7 +11,7 @@ BWC_OBJ        = src/luci-bwc.o
 	$(COMPILE) $(BWC_CFLAGS) $(LUA_CFLAGS) $(FPIC) -c -o $@ $<
 
 compile: build-clean $(BWC_OBJ)
-	$(LINK) -o src/$(BWC_BIN) $(BWC_OBJ) $(BWC_LDFLAGS)
+	$(LINK) $(BWC_LDFLAGS) -o src/$(BWC_BIN) $(BWC_OBJ)
 	mkdir -p dist/usr/bin
 	cp src/$(BWC_BIN) dist/usr/bin/$(BWC_BIN)
 

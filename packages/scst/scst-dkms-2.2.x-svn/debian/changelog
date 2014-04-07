@@ -1,0 +1,5 @@
+scst-dkms (2.2.x-svn-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Denia a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>  Thu, 20 Mar 2014 10:24:52 +0400

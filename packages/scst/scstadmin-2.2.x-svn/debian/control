@@ -1,0 +1,12 @@
+Source: scstadmin
+Section: admin
+Priority: optional
+Maintainer: Denia a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+Homepage: 
+
+Package: scstadmin
+Architecture: amd64
+Depends: perl
+Description: SCST userspace utilities.

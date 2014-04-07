@@ -5,51 +5,56 @@ function index()
 		return
 	end
 
+	require("luci.i18n").loadc("olsr")
+	local i18n = luci.i18n.translate
+
 	local page  = node("admin", "status", "olsr")
 	page.target = template("status-olsr/overview")
-	page.title  = _("OLSR")
+	page.title  = i18n("OLSR")
+	page.i18n   = "olsr"
 	page.subindex = true
 
 	local page  = node("admin", "status", "olsr", "neighbors")
 	page.target = call("action_neigh")
-	page.title  = _("Neighbours")
+	page.title  = i18n("Neighbours")
 	page.subindex = true
 	page.order  = 5
 
 	local page  = node("admin", "status", "olsr", "routes")
 	page.target = call("action_routes")
-	page.title  = _("Routes")
+	page.title  = i18n("Routes")
 	page.order  = 10
 
 	local page  = node("admin", "status", "olsr", "topology")
 	page.target = call("action_topology")
-	page.title  = _("Topology")
+	page.title  = i18n("Topology")
 	page.order  = 20
 
 	local page  = node("admin", "status", "olsr", "hna")
 	page.target = call("action_hna")
-	page.title  = _("HNA")
+	page.title  = i18n("HNA")
 	page.order  = 30
 
 	local page  = node("admin", "status", "olsr", "mid")
 	page.target = call("action_mid")
-	page.title  = _("MID")
+	page.title  = i18n("MID")
 	page.order  = 50
 
 	local page  = node("admin", "status", "olsr", "smartgw")
 	page.target = call("action_smartgw")
-	page.title  = _("SmartGW")
+	page.title  = i18n("SmartGW")
 	page.order  = 60
 
 	local page  = node("admin", "status", "olsr", "interfaces")
         page.target = call("action_interfaces")
-        page.title  = _("Interfaces")
+        page.title  = i18n("Interfaces")
         page.order  = 70
 
 	local ol = entry(
 		{"admin", "services", "olsrd"},
 		cbi("olsr/olsrd"), "OLSR"
 	)
+	ol.i18n = "olsr"
 	ol.subindex = true
 
 	entry(
@@ -59,19 +64,20 @@ function index()
 
 	entry(
 		{"admin", "services", "olsrd", "hna"},
-		cbi("olsr/olsrdhna"), _("HNA Announcements")
+		cbi("olsr/olsrdhna"), i18n("HNA Announcements")
 	)
 
 	oplg = entry(
 		{"admin", "services", "olsrd", "plugins"},
-		cbi("olsr/olsrdplugins"), _("Plugins")
+		cbi("olsr/olsrdplugins"), i18n("Plugins")
 	)
 
 	odsp = entry(
 		{"admin", "services", "olsrd", "display"},
-		cbi("olsr/olsrddisplay"), _("Display")
+		cbi("olsr/olsrddisplay"), i18n("Display")
 		)
 
+	oplg.i18n = "olsr"
 	oplg.leaf = true
 	oplg.subindex = true
 
@@ -88,21 +94,7 @@ function index()
 	)
 end
 
-local function compare_links(a, b)
-	local c = tonumber(a.Cost)
-	local d = tonumber(b.Cost)
-
-	if not c or c == 0 then
-		return false
-	end
-
-	if not d or d == 0 then
-		return true
-	end
-	return c < d
-end
-
-function action_neigh(json)
+function action_neigh()
 	local data = fetch_txtinfo("links")
 
 	if not data or not data.Links then
@@ -110,7 +102,22 @@ function action_neigh(json)
 		return nil
 	end
 
-	table.sort(data.Links, compare_links)
+	local function compare(a, b)
+		local c = tonumber(a.Cost)
+		local d = tonumber(b.Cost)
+
+		if not c or c == 0 then
+			return false
+		end
+
+		if not d or d == 0 then
+			return true
+		end
+
+		return c < d
+	end
+
+	table.sort(data.Links, compare)
 
 	luci.template.render("status-olsr/neighbors", {links=data.Links})
 end
@@ -333,9 +340,8 @@ function fetch_txtinfo(otable)
 						data[name][di]['Local Device'] = fields[k]
 						uci:foreach("network", "interface",
 						function(s)
-							local localip = string.gsub(fields[k], '	', ''):upper()
+							local localip = string.gsub(fields[k], '	', '')
 							if s.ip6addr then
-								s.ip6addr = luci.ip.IPv6(s.ip6addr):string()
 								local ip6addr = string.gsub(s.ip6addr, '\/.*', '')
 								if ip6addr == localip then
 									data[name][di]['Local Device'] = s['.name'] or s.interface

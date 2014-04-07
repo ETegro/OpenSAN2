@@ -1,0 +1,7 @@
+Package: lua5.1-lib-sha
+Maintainer: Denis a.k.a Difrex Zheleztsov <difrex.punk@gmail.com>
+Version: 0.2.0
+Section: libs
+Architecture: amd64
+Depends: lua5.1
+Description: SHA2 crypt LUA library

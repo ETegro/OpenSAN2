@@ -9,19 +9,20 @@ You may obtain a copy of the License at
 
         http://www.apache.org/licenses/LICENSE-2.0
 
-$Id: p910nd.lua 9558 2012-12-18 13:58:22Z jow $
+$Id: p910nd.lua 5448 2009-10-31 15:54:11Z jow $
 
 ]]--
 
 module("luci.controller.p910nd", package.seeall)
 
 function index()
-	if not nixio.fs.access("/etc/config/p910nd") then
-		return
-	end
+       require("luci.i18n")
+       luci.i18n.loadc("p910nd")
+       if not nixio.fs.access("/etc/config/p910nd") then
+               return
+       end
 
-	local page
-
-	page = entry({"admin", "services", "p910nd"}, cbi("p910nd"), _("p910nd - Printer server"), 60)
-	page.dependent = true
+       local page = entry({"admin", "services", "p910nd"}, cbi("p910nd"), luci.i18n.translate("p910nd - Printer server"), 60)
+       page.i18n = "p910nd"
+       page.dependent = true
 end

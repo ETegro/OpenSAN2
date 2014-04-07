@@ -1,6 +1,5 @@
 #
 # Copyright (C) 2009 Andreas Seidler <tetzlav@subsignal.org>
-# Copyright (C) 2012 Jo-Philipp Wich <xm@subsignal.org>
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -9,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=freifunk-p2pblock
-PKG_RELEASE:=3
+PKG_RELEASE:=1
 
 PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
@@ -18,9 +17,9 @@ include $(INCLUDE_DIR)/package.mk
 define Package/freifunk-p2pblock
   SECTION:=luci
   CATEGORY:=LuCI
-  SUBMENU:=9. Freifunk
+  SUBMENU:=Freifunk
   TITLE:=Freifunk p2pblock Addon
-  DEPENDS:=+iptables-mod-filter +iptables-mod-ipp2p +l7-protocols +iptables-mod-conntrack-extra
+  DEPENDS:=+iptables-mod-filter +l7-protocols +iptables-mod-conntrack-extra +kmod-ipt-compat-xtables +kmod-ipt-ipp2p
 endef
 
 define Package/freifunk-p2pblock/description

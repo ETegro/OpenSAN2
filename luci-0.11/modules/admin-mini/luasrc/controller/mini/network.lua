@@ -10,14 +10,17 @@ You may obtain a copy of the License at
 
 	http://www.apache.org/licenses/LICENSE-2.0
 
-$Id: network.lua 7362 2011-08-12 13:16:27Z jow $
+$Id: network.lua 5485 2009-11-01 14:24:04Z jow $
 ]]--
 
 module("luci.controller.mini.network", package.seeall)
 
 function index()
-	entry({"mini", "network"}, alias("mini", "network", "index"), _("Network"), 20).index = true
-	entry({"mini", "network", "index"}, cbi("mini/network", {autoapply=true}), _("General"), 1)
-	entry({"mini", "network", "wifi"}, cbi("mini/wifi", {autoapply=true}), _("Wifi"), 10)
-	entry({"mini", "network", "dhcp"}, cbi("mini/dhcp", {autoapply=true}), _("DHCP"), 20)
+	luci.i18n.loadc("base")
+	local i18n = luci.i18n.translate
+
+	entry({"mini", "network"}, alias("mini", "network", "index"), i18n("Network"), 20).index = true
+	entry({"mini", "network", "index"}, cbi("mini/network", {autoapply=true}), i18n("General"), 1)
+	entry({"mini", "network", "wifi"}, cbi("mini/wifi", {autoapply=true}), i18n("Wifi"), 10)
+	entry({"mini", "network", "dhcp"}, cbi("mini/dhcp", {autoapply=true}), "DHCP", 20)
 end

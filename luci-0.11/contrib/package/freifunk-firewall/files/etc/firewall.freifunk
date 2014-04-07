@@ -1,6 +1,6 @@
 #!/bin/sh
 # Freifunk Firewall addons
-# $Id: firewall.freifunk 7807 2011-10-27 14:40:45Z soma $
+# $Id: firewall.freifunk 6708 2011-01-12 17:42:23Z soma $
 
 
 #
@@ -35,6 +35,22 @@ apply_advanced() {
 }
 
 config_foreach apply_advanced advanced
+
+
+#
+# Apply fixes for masquerading rules
+#
+apply_nat_fix() {
+	local up
+	local ifname
+	config_get up $1 up
+	[ -n "$up" ] || return 0
+	(ACTION="ifup" INTERFACE="$1" . /etc/hotplug.d/iface/22-firewall-nat-fix )
+}
+
+uci_set_state firewall core loaded 1
+config_foreach fw_addif interface
+config_foreach apply_nat_fix interface
 
 [ -x /etc/init.d/luci_splash ] && ( sleep 3; /etc/init.d/luci_splash restart )&
 

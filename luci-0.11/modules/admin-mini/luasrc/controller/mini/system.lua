@@ -10,18 +10,21 @@ You may obtain a copy of the License at
 
 	http://www.apache.org/licenses/LICENSE-2.0
 
-$Id: system.lua 9655 2013-01-27 18:43:41Z jow $
+$Id: system.lua 6068 2010-04-15 00:15:35Z cshore $
 ]]--
 
 module("luci.controller.mini.system", package.seeall)
 
 function index()
-	entry({"mini", "system"}, alias("mini", "system", "index"), _("System"), 40).index = true
-	entry({"mini", "system", "index"}, cbi("mini/system", {autoapply=true}), _("General"), 1)
-	entry({"mini", "system", "passwd"}, form("mini/passwd"), _("Admin Password"), 10)
-	entry({"mini", "system", "backup"}, call("action_backup"), _("Backup / Restore"), 80)
-	entry({"mini", "system", "upgrade"}, call("action_upgrade"), _("Flash Firmware"), 90)
-	entry({"mini", "system", "reboot"}, call("action_reboot"), _("Reboot"), 100)
+	luci.i18n.loadc("base")
+	local i18n = luci.i18n.translate
+
+	entry({"mini", "system"}, alias("mini", "system", "index"), i18n("System"), 40).index = true
+	entry({"mini", "system", "index"}, cbi("mini/system", {autoapply=true}), i18n("General"), 1)
+	entry({"mini", "system", "passwd"}, form("mini/passwd"), i18n("Admin Password"), 10)
+	entry({"mini", "system", "backup"}, call("action_backup"), i18n("Backup / Restore"), 80)
+	entry({"mini", "system", "upgrade"}, call("action_upgrade"), i18n("Flash Firmware"), 90)
+	entry({"mini", "system", "reboot"}, call("action_reboot"), i18n("Reboot"), 100)
 end
 
 function action_backup()
@@ -81,7 +84,7 @@ function action_upgrade()
 	local function image_supported()
 		-- XXX: yay...
 		return ( 0 == os.execute(
-			". /lib/functions.sh; " ..
+			". /etc/functions.sh; " ..
 			"include /lib/upgrade; " ..
 			"platform_check_image %q >/dev/null"
 				% tmpfile

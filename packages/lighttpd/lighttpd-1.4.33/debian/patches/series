@@ -1,0 +1,3 @@
+build-dev-package.patch
+add-lighttpd.pc-configure.patch
+root.patch

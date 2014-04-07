@@ -10,18 +10,18 @@ You may obtain a copy of the License at
 
 	http://www.apache.org/licenses/LICENSE-2.0
 
-$Id: samba.lua 9558 2012-12-18 13:58:22Z jow $
+$Id: samba.lua 5448 2009-10-31 15:54:11Z jow $
 ]]--
-
 module("luci.controller.samba", package.seeall)
 
 function index()
 	if not nixio.fs.access("/etc/config/samba") then
 		return
 	end
-
-	local page
-
-	page = entry({"admin", "services", "samba"}, cbi("samba"), _("Network Shares"))
+	require("luci.i18n")
+	luci.i18n.loadc("samba")
+	
+	local page = entry({"admin", "services", "samba"}, cbi("samba"), luci.i18n.translate("Network Shares"))
+	page.i18n = "samba"
 	page.dependent = true
 end
