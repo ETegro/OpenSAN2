@@ -5,7 +5,7 @@ Description:
 The request dispatcher and module dispatcher generators
 
 FileId:
-$Id: dispatcher.lua 9018 2012-08-14 15:31:26Z jow $
+$Id: dispatcher.lua 6643 2010-12-12 20:16:13Z jow $
 
 License:
 Copyright 2008 Steven Barth <steven@midlink.org>
@@ -73,43 +73,6 @@ function build_url(...)
 	return table.concat(url, "")
 end
 
---- Check whether a dispatch node shall be visible
--- @param node	Dispatch node
--- @return		Boolean indicating whether the node should be visible
-function node_visible(node)
-   if node then
-	  return not (
-		 (not node.title or #node.title == 0) or
-		 (not node.target or node.hidden == true) or
-		 (type(node.target) == "table" and node.target.type == "firstchild" and
-		  (type(node.nodes) ~= "table" or not next(node.nodes)))
-	  )
-   end
-   return false
-end
-
---- Return a sorted table of visible childs within a given node
--- @param node	Dispatch node
--- @return		Ordered table of child node names
-function node_childs(node)
-	local rv = { }
-	if node then
-		local k, v
-		for k, v in util.spairs(node.nodes,
-			function(a, b)
-				return (node.nodes[a].order or 100)
-				     < (node.nodes[b].order or 100)
-			end)
-		do
-			if node_visible(v) then
-				rv[#rv+1] = k
-			end
-		end
-	end
-	return rv
-end
-
-
 --- Send a 404 error code and render the "error404" template if available.
 -- @param message	Custom error message (optional)
 -- @return			false
@@ -155,8 +118,8 @@ function authenticator.htmlauth(validator, accs, default)
 	require("luci.i18n")
 	require("luci.template")
 	context.path = {}
-	luci.template.render("sysauth", {duser=default, fuser=user})
-	return false
+    luci.template.render("san", {duser=default, fuser=user})
+    return false
 
 end
 
@@ -167,8 +130,6 @@ function httpdispatch(request, prefix)
 
 	local r = {}
 	context.request = r
-	context.urltoken = {}
-
 	local pathinfo = http.urldecode(request:getenv("PATH_INFO") or "", true)
 
 	if prefix then
@@ -177,18 +138,8 @@ function httpdispatch(request, prefix)
 		end
 	end
 
-	local tokensok = true
 	for node in pathinfo:gmatch("[^/]+") do
-		local tkey, tval
-		if tokensok then
-			tkey, tval = node:match(";(%w+)=([a-fA-F0-9]*)")
-		end
-		if tkey then
-			context.urltoken[tkey] = tval
-		else
-			tokensok = false
-			r[#r+1] = node
-		end
+		r[#r+1] = node
 	end
 
 	local stat, err = util.coxpcall(function()
@@ -206,6 +157,7 @@ function dispatch(request)
 	--context._disable_memtrace = require "luci.debug".trap_memtrace("l")
 	local ctx = context
 	ctx.path = request
+	ctx.urltoken   = ctx.urltoken or {}
 
 	local conf = require "luci.config"
 	assert(conf.main,
@@ -235,23 +187,34 @@ function dispatch(request)
 	ctx.args = args
 	ctx.requestargs = ctx.requestargs or args
 	local n
+	local t = true
 	local token = ctx.urltoken
 	local preq = {}
 	local freq = {}
 
 	for i, s in ipairs(request) do
-		preq[#preq+1] = s
-		freq[#freq+1] = s
-		c = c.nodes[s]
-		n = i
-		if not c then
-			break
+		local tkey, tval
+		if t then
+			tkey, tval = s:match(";(%w+)=([a-fA-F0-9]*)")
 		end
 
-		util.update(track, c)
+		if tkey then
+			token[tkey] = tval
+		else
+			t = false
+			preq[#preq+1] = s
+			freq[#freq+1] = s
+			c = c.nodes[s]
+			n = i
+			if not c then
+				break
+			end
 
-		if c.leaf then
-			break
+			util.update(track, c)
+
+			if c.leaf then
+				break
+			end
 		end
 	end
 
@@ -266,7 +229,7 @@ function dispatch(request)
 	ctx.path = preq
 
 	if track.i18n then
-		i18n.loadc(track.i18n)
+		require("luci.i18n").loadc(track.i18n)
 	end
 
 	-- Init template engine
@@ -284,35 +247,16 @@ function dispatch(request)
 			assert(media, "No valid theme found")
 		end
 
-		local function _ifattr(cond, key, val)
-			if cond then
-				local env = getfenv(3)
-				local scope = (type(env.self) == "table") and env.self
-				return string.format(
-					' %s="%s"', tostring(key),
-					luci.util.pcdata(tostring( val
-					 or (type(env[key]) ~= "function" and env[key])
-					 or (scope and type(scope[key]) ~= "function" and scope[key])
-					 or "" ))
-				)
-			else
-				return ''
-			end
-		end
-
 		tpl.context.viewns = setmetatable({
 		   write       = luci.http.write;
 		   include     = function(name) tpl.Template(name):render(getfenv(2)) end;
-		   translate   = i18n.translate;
-		   translatef  = i18n.translatef;
+		   translate   = function(...) return require("luci.i18n").translate(...) end;
 		   export      = function(k, v) if tpl.context.viewns[k] == nil then tpl.context.viewns[k] = v end end;
 		   striptags   = util.striptags;
 		   pcdata      = util.pcdata;
 		   media       = media;
 		   theme       = fs.basename(media);
-		   resource    = luci.config.main.resourcebase;
-		   ifattr      = function(...) return _ifattr(...) end;
-		   attr        = function(...) return _ifattr(true, ...) end;
+		   resource    = luci.config.main.resourcebase
 		}, {__index=function(table, key)
 			if key == "controller" then
 				return build_url()
@@ -325,13 +269,9 @@ function dispatch(request)
 	end
 
 	track.dependent = (track.dependent ~= false)
-	assert(not track.dependent or not track.auto,
-		"Access Violation\nThe page at '" .. table.concat(request, "/") .. "/' " ..
-		"has no parent node so the access to this location has been denied.\n" ..
-		"This is a software bug, please report this message at " ..
-		"http://luci.subsignal.org/trac/newticket"
-	)
+	assert(not track.dependent or not track.auto, "Access Violation")
 
+    --[[
 	if track.sysauth then
 		local sauth = require "luci.sauth"
 
@@ -353,6 +293,9 @@ function dispatch(request)
 		local user
 
 		if sdat then
+			sdat = loadstring(sdat)
+			setfenv(sdat, {})
+			sdat = sdat()
 			if not verifytoken or ctx.urltoken.stok == sdat.token then
 				user = sdat.user
 			end
@@ -374,12 +317,11 @@ function dispatch(request)
 					local sid = sess or luci.sys.uniqueid(16)
 					if not sess then
 						local token = luci.sys.uniqueid(16)
-						sauth.reap()
-						sauth.write(sid, {
+						sauth.write(sid, util.get_bytecode({
 							user=user,
 							token=token,
 							secret=luci.sys.uniqueid(16)
-						})
+						}))
 						ctx.urltoken.stok = token
 					end
 					luci.http.header("Set-Cookie", "sysauth=" .. sid.."; path="..build_url())
@@ -393,8 +335,9 @@ function dispatch(request)
 		else
 			ctx.authsession = sess
 			ctx.authuser = user
-		end
+        end
 	end
+    ]]
 
 	if track.setgroup then
 		luci.sys.process.setgroup(track.setgroup)
@@ -439,27 +382,13 @@ function dispatch(request)
 			setfenv(target, env)
 		end)
 
-		local ok, err
 		if type(c.target) == "table" then
-			ok, err = util.copcall(target, c.target, unpack(args))
+			target(c.target, unpack(args))
 		else
-			ok, err = util.copcall(target, unpack(args))
+			target(unpack(args))
 		end
-		assert(ok,
-		       "Failed to execute " .. (type(c.target) == "function" and "function" or c.target.type or "unknown") ..
-		       " dispatcher target for entry '/" .. table.concat(request, "/") .. "'.\n" ..
-		       "The called action terminated with an exception:\n" .. tostring(err or "(unknown)"))
 	else
-		local root = node()
-		if not root or not root.target then
-			error404("No root node was registered, this usually happens if no module was installed.\n" ..
-			         "Install luci-mod-admin-full and retry. " ..
-			         "If the module is already installed, try removing the /tmp/luci-indexcache file.")
-		else
-			error404("No page is registered at '/" .. table.concat(request, "/") .. "'.\n" ..
-			         "If this url belongs to an extension, make sure it is properly installed.\n" ..
-			         "If the extension was recently installed, try removing the /tmp/luci-indexcache file.")
-		end
+		error404()
 	end
 end
 
@@ -510,7 +439,7 @@ function createindex_plain(path, suffixes)
 		if cachedate then
 			local realdate = 0
 			for _, obj in ipairs(controllers) do
-				local omtime = fs.stat(obj, "mtime")
+				local omtime = fs.stat(path .. "/" .. obj, "mtime")
 				realdate = (omtime and omtime > realdate) and omtime or realdate
 			end
 
@@ -536,20 +465,11 @@ function createindex_plain(path, suffixes)
 		end
 
 		local mod = require(modname)
-		assert(mod ~= true,
-		       "Invalid controller file found\n" ..
-		       "The file '" .. c .. "' contains an invalid module line.\n" ..
-		       "Please verify whether the module name is set to '" .. modname ..
-		       "' - It must correspond to the file path!")
-
 		local idx = mod.index
-		assert(type(idx) == "function",
-		       "Invalid controller file found\n" ..
-		       "The file '" .. c .. "' contains no index() function.\n" ..
-		       "Please make sure that the controller contains a valid " ..
-		       "index function and verify the spelling!")
 
-		index[modname] = idx
+		if type(idx) == "function" then
+			index[modname] = idx
+		end
 	end
 
 	if indexcache then
@@ -567,7 +487,7 @@ function createtree()
 	end
 
 	local ctx  = context
-	local tree = {nodes={}, inreq=true}
+	local tree = {nodes={}}
 	local modi = {}
 
 	ctx.treecache = setmetatable({}, {__mode="v"})
@@ -666,60 +586,31 @@ function node(...)
 	return c
 end
 
-function _create_node(path)
+function _create_node(path, cache)
 	if #path == 0 then
 		return context.tree
 	end
 
+	cache = cache or context.treecache
 	local name = table.concat(path, ".")
-	local c = context.treecache[name]
+	local c = cache[name]
 
 	if not c then
+		local new = {nodes={}, auto=true, path=util.clone(path)}
 		local last = table.remove(path)
-		local parent = _create_node(path)
 
-		c = {nodes={}, auto=true}
-		-- the node is "in request" if the request path matches
-		-- at least up to the length of the node path
-		if parent.inreq and context.path[#path+1] == last then
-		  c.inreq = true
-		end
-		parent.nodes[last] = c
-		context.treecache[name] = c
+		c = _create_node(path, cache)
+
+		c.nodes[last] = new
+		cache[name] = new
+
+		return new
+	else
+		return c
 	end
-	return c
 end
 
 -- Subdispatchers --
-
-function _firstchild()
-   local path = { unpack(context.path) }
-   local name = table.concat(path, ".")
-   local node = context.treecache[name]
-
-   local lowest
-   if node and node.nodes and next(node.nodes) then
-	  local k, v
-	  for k, v in pairs(node.nodes) do
-		 if not lowest or
-			(v.order or 100) < (node.nodes[lowest].order or 100)
-		 then
-			lowest = k
-		 end
-	  end
-   end
-
-   assert(lowest ~= nil,
-		  "The requested node contains no childs, unable to redispatch")
-
-   path[#path+1] = lowest
-   dispatch(path)
-end
-
---- Alias the first (lowest order) page automatically
-function firstchild()
-   return { type = "firstchild", target = _firstchild }
-end
 
 --- Create a redirect to another dispatching node.
 -- @param	...		Virtual path destination
@@ -760,18 +651,10 @@ end
 
 
 local function _call(self, ...)
-	local func = getfenv()[self.name]
-	assert(func ~= nil,
-	       'Cannot resolve function "' .. self.name .. '". Is it misspelled or local?')
-
-	assert(type(func) == "function",
-	       'The symbol "' .. self.name .. '" does not refer to a function but data ' ..
-	       'of type "' .. type(func) .. '".')
-
 	if #self.argv > 0 then
-		return func(unpack(self.argv), ...)
+		return getfenv()[self.name](unpack(self.argv), ...)
 	else
-		return func(...)
+		return getfenv()[self.name](...)
 	end
 end
 
@@ -943,17 +826,4 @@ end
 -- @param	model	CBI form model tpo be rendered
 function form(model)
 	return {type = "cbi", model = model, target = _form}
-end
-
---- Access the luci.i18n translate() api.
--- @class  function
--- @name   translate
--- @param  text    Text to translate
-translate = i18n.translate
-
---- No-op function used to mark translation entries for menu labels.
--- This function does not actually translate the given argument but
--- is used by build/i18n-scan.pl to find translatable entries.
-function _(text)
-	return text
 end
