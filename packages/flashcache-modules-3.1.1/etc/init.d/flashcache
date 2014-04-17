@@ -1,0 +1,37 @@
+#!/bin/bash
+
+start()
+{
+	if [[ -e /lib/modules/flashcache.ko ]]; then
+        	insmod /lib/modules/flashcache.ko
+	else
+		echo -e "Missing module!\n Try to reinstall package."
+		exit 1
+	fi
+}
+
+stop()
+{
+        true
+}
+
+status() 
+{
+	lsmod | grep flashcache
+}
+
+case $1 in start)
+	start
+	;;
+	stop)
+	stop
+	;;
+	status)
+	status
+	;;
+	*)
+	echo -e "Unknown argument\n"
+	echo -e "USAGE: $0 [start|stop|status]\n"
+	exit 1
+	;;
+esac

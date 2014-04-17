@@ -1,0 +1,6 @@
+011c70f90dad900061cc8a3f2156ed8d  /opt/src/build_nfs/flashcache-utils-3.1.1/usr/sbin/flashcache_create
+0bdaccb9710a6386e935775ca8074ce5  /opt/src/build_nfs/flashcache-utils-3.1.1/usr/sbin/flashcache_destroy
+8bf816f062463aca5d262035b2ea0017  /opt/src/build_nfs/flashcache-utils-3.1.1/usr/sbin/flashcache_load
+ffd4963c76b0252caf53eb38e6933475  /opt/src/build_nfs/flashcache-utils-3.1.1/usr/sbin/flashcache_scan
+125357d946e48ce45633deb53b6b8e20  /opt/src/build_nfs/flashcache-utils-3.1.1/usr/sbin/flashcache_setioctl
+e1f214e490c4c72a7a3cbf29a4d89ed8  /opt/src/build_nfs/flashcache-utils-3.1.1/usr/sbin/get_agsize
