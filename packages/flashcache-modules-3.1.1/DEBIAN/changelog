@@ -1,0 +1,5 @@
+flashcache-modules (3.1.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- root <root@unknown>  Tue, 01 Apr 2014 12:17:21 +0400
