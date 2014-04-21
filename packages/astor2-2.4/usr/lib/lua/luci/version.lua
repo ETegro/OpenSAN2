@@ -6,7 +6,7 @@ if pcall(dofile, "/etc/openwrt_release") and _G.DISTRIB_DESCRIPTION then
 	distname    = ""
 	distversion = _G.DISTRIB_DESCRIPTION
 else
-	distname    = "OpenSAN"
+	distname    = "OpenSAN2"
 	distversion = "V2.4.2-FS100G3"
 end
 
