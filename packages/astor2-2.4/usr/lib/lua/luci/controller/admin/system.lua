@@ -39,7 +39,7 @@ function index()
 ]]
 
 	entry({"admin", "system", "backup"}, call("action_backup"), i18n("Backup / Restore"), 70)
-	entry({"admin", "system", "upgrade"}, call("action_upgrade"), i18n("Flash Firmware"), 80)
+	---entry({"admin", "system", "upgrade"}, call("action_upgrade"), i18n("Flash Firmware"), 80)
 	entry({"admin", "system", "reboot"}, call("action_reboot"), i18n("Reboot"), 90)
 	entry({"admin", "system", "shutdown"}, call("action_shutdown"), i18n("Shutdown"), 100)
 end
@@ -213,6 +213,7 @@ function action_shutdown()
 	end
 end
 
+--[[
 function action_upgrade()
 	require("luci.model.uci")
 
@@ -339,7 +340,7 @@ function action_upgrade()
 		} )
 	end
 end
-
+]]--
 function ltn12_popen(command)
 
 	local fdi, fdo = nixio.pipe()
