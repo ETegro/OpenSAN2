@@ -27,14 +27,14 @@ function index()
 	page.target  = alias("admin", "san")
 	page.title   = i18n("Administration")
 	page.order   = 10
-	page.sysauth = "root"
-	page.sysauth_authenticator = "htmlauth"
+--	page.sysauth = "root"
+--	page.sysauth_authenticator = "htmlauth"
 	page.ucidata = true
 	page.index = true
 
-	entry({"admin", "logout"}, call("action_logout"), i18n("Logout"), 90)
+--	entry({"admin", "logout"}, call("action_logout"), i18n("Login"), 90)
 end
-
+--[[
 function action_logout()
 	local dsp = require "luci.dispatcher"
 	local sauth = require "luci.sauth"
@@ -46,3 +46,4 @@ function action_logout()
 	luci.http.header("Set-Cookie", "sysauth=; path=" .. dsp.build_url())
 	luci.http.redirect(luci.dispatcher.build_url())
 end
+]]
