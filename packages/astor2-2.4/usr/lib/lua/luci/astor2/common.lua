@@ -20,8 +20,8 @@
 
 local M = {}
 
-local SHELL_PATH = "/bin/sh"
-local LOG_CMD = "/usr/bin/logger -t common.astor2 "
+local SHELL_PATH = "/bin/bash"
+local LOG_CMD = "/usr/bin/logger -t common.astor2 -s -f /var/log/astor2"
 
 local function log_append( str )
 	local log_fd = io.popen( LOG_CMD, "w" )
@@ -53,9 +53,14 @@ function M.system( cmdline )
 	local result = {}
 
 	-- Execute command and retreive return code
-	result.return_code = os.execute(
+--[[	result.return_code = os.execute(
 		SHELL_PATH .. " "
 		.. script_path
+		.. " >" .. stdout_path
+		.. " 2>" .. stderr_path
+	)]]--
+	result.return_code = os.execute(
+		"yes | " .. cmdline
 		.. " >" .. stdout_path
 		.. " 2>" .. stderr_path
 	)
@@ -78,7 +83,9 @@ function M.system( cmdline )
 	end
 	stderr_fd:close()
 	os.remove( stderr_path )
-
+	os.execute( "echo " .. cmdline .. ">> /var/log/astor2" )
+	os.execute( "date >> /var/log/astor2" )
+--	os.execute( "echo " .. script_path .. ">> /var/log/astor2" )
 	return result
 end
 
