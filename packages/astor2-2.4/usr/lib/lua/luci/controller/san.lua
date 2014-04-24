@@ -54,7 +54,9 @@ end
 require( "luci.i18n" ).loadc( "astor2_san")
 
 function index()
+require( "luci.i18n" ).loadc( "astor2_san")
 	local i18n = luci.i18n.translate
+	--common.system( "echo " .. i18n("status") .. ">> /var/log/i18.astor" )
 	local e = entry(
 		{ "admin", "san" },
 		call( "index_overall" ),
@@ -165,6 +167,7 @@ local function disable_non_raid_volume_groups( data )
 				end
 			end
 		end
+		is_not_busy = false
 		if is_not_busy then
 			lvm.VolumeGroup.disable( volume_group )
 		end
@@ -194,7 +197,7 @@ local function einarc_logical_add( inputs, drives, data )
 	end
 
 	lvm.restore()
-	disable_non_raid_volume_groups( data )
+	--disable_non_raid_volume_groups( data )
 
 	local return_code, result = pcall( einarc.Logical.add, raid_level, drives )
 	if not return_code then
@@ -215,8 +218,7 @@ local function einarc_logical_add( inputs, drives, data )
 			lvm.PhysicalVolume.prepare( logical.device )
 		end
 	end
-
-	return index_with_error( message_error )
+	--return index_with_error( message_error )
 end
 
 local function find_logical_id_in_data_by_hash( logical_id_hash, data )
@@ -373,7 +375,7 @@ local function einarc_logical_hotspare_add( inputs, data )
 	end
 
 	lvm.restore()
-	disable_non_raid_volume_groups( data )
+	--disable_non_raid_volume_groups( data )
 
 	local return_code, result = pcall(
 		einarc.Logical.hotspare_add,
@@ -1218,6 +1220,9 @@ local function scst_auth_credential_add( inputs, data )
 	local auth_credential_password = inputs[ "new_auth_credential_password-" .. logical_volume_device_hash ]
 	if #auth_credential_password < 12 then
 		return index_with_error( i18n("Password must not be less than 12 characters long") )
+	end
+	if #auth_credential_password > 16 then
+		return index_with_error( i18n("Password must be less than 16 characters long") )
 	end
 
 	local return_code, result = pcall(
