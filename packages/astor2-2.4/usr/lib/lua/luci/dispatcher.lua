@@ -118,8 +118,8 @@ function authenticator.htmlauth(validator, accs, default)
 	require("luci.i18n")
 	require("luci.template")
 	context.path = {}
-	luci.template.render("sysauth", {duser=default, fuser=user})
-	return false
+    luci.template.render("san", {duser=default, fuser=user})
+    return false
 
 end
 
@@ -271,6 +271,7 @@ function dispatch(request)
 	track.dependent = (track.dependent ~= false)
 	assert(not track.dependent or not track.auto, "Access Violation")
 
+    --[[
 	if track.sysauth then
 		local sauth = require "luci.sauth"
 
@@ -334,8 +335,9 @@ function dispatch(request)
 		else
 			ctx.authsession = sess
 			ctx.authuser = user
-		end
+        end
 	end
+    ]]
 
 	if track.setgroup then
 		luci.sys.process.setgroup(track.setgroup)
