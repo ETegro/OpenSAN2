@@ -25,6 +25,7 @@ function index()
 	entry({"admin", "status", "syslog"}, call("action_syslog"), i18n("System Log"), 4)
 	entry({"admin", "status", "dmesg"}, call("action_dmesg"), i18n("Kernel Log"), 5)
 
+	entry({"admin", "status", "plots"}, call("action_plots"), i18n("Plots"), 2)
 	--entry({"admin", "status", "load"}, template("admin_status/load"), i18n("Realtime Load"), 6).leaf = true
 	--entry({"admin", "status", "load_status"}, call("action_load")).leaf = true
 
@@ -40,6 +41,11 @@ function index()
 end
 
 function action_syslog()
+	local syslog = luci.sys.syslog()
+	luci.template.render("admin_status/syslog", {syslog=syslog})
+end
+
+function action_plots()
 	local syslog = luci.sys.syslog()
 	luci.template.render("admin_status/syslog", {syslog=syslog})
 end
