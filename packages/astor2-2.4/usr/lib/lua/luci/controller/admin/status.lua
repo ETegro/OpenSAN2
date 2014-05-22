@@ -13,6 +13,8 @@ You may obtain a copy of the License at
 $Id: status.lua 7025 2011-05-04 21:23:55Z jow $
 ]]--
 module("luci.controller.admin.status", package.seeall)
+common = require "astor2.common"
+
 
 function index()
 	luci.i18n.loadc("base")
@@ -46,8 +48,10 @@ function action_syslog()
 end
 
 function action_plots()
-	local syslog = luci.sys.syslog()
-	luci.template.render("admin_status/syslog", {syslog=syslog})
+    local cpu = 'rrdtool graph /var/www/luci-static/resources/cpu.png  -e now  -s "end - 3 hours"  -S 60 --title "CPU USAGE" --vertical-label "Percents" --imgformat PNG --slope-mode --lower-limit 0  --upper-limit 100  --rigid  -E  -i  --color SHADEA#FFFFFF  --color SHADEB#FFFFFF --color BACK#CCCCCC -w 600 -h 150 --interlaced --font DEFAULT:8:/usr/local/share/rrdtool/fonts/ARIAL8.TTF DEF:a=/var/lib/collectd/rrd/ubuntu/cpu-0/cpu-idle.rrd:value:MAX DEF:b=/var/lib/collectd/rrd/ubuntu/cpu-0/cpu-system.rrd:value:MAX DEF:c=/var/lib/collectd/rrd/ubuntu/cpu-0/cpu-user.rrd:value:MAX LINE2:b#2cc320: AREA:b#54eb48:System LINE2:c#e7ad4a: AREA:c#ebd648:User >>/dev/null 2>>/dev/null;' 
+    common.system(cpu);
+    
+	luci.template.render("admin_status/plots", {plots=plots})
 end
 
 function action_dmesg()
