@@ -193,7 +193,7 @@ end
 --- Retrieves the output of the "logread" command.
 -- @return	String containing the current log buffer
 function syslog()
-	return luci.util.exec("cat /var/log/messages")
+	return luci.util.exec("cat /var/log/syslog")
 end
 
 --- Retrieves the output of the "dmesg" command.
