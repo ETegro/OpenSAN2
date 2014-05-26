@@ -30,6 +30,7 @@ M.LOGICAL_STATES = {
 	"initializing",
 	"rebuilding",
 	"reshaping",
+	0,
 }
 M.LOGICAL_STATES_MAP = {
 	["clean"] = "normal",
@@ -39,12 +40,14 @@ M.LOGICAL_STATES_MAP = {
 	["Not Started"] = "degraded",
 	["degraded"] = "degraded",
 	["resyncing"] = "initializing",
-	["recovering"] = "rebuilding"
+	["recovering"] = "rebuilding",
+	[0] = "normal",
 }
 M.PHYSICAL_STATES = {
 	"hotspare",
 	"failed",
-	"free"
+	"free",
+	0,
 }
 
 ------------------------------------------------------------------------
@@ -157,6 +160,7 @@ local function run( args )
 	local result
 	while cycle > 0 do
 		result = common.system( "mdadm " .. args .. " 2>&1" )
+		os.execute("echo 'mdadm " .. args .. "' >> /tmp/common.log")
 		if result.return_code == 0 then
 			cycle = 0
 		else
@@ -223,6 +227,9 @@ function M.Logical:new( attrs )
 	if attrs.state ~= "failed" then
 		assert( common.is_string( attrs.level ),
 				"empty level" )
+	end
+	if attrs.state == 0 then
+		attrs.state = "normal"
 	end
 	assert( common.is_non_negative( attrs.capacity ),
 	        "non-positive capacity" )
@@ -501,6 +508,7 @@ function M.Logical:powersaving_disable()
 		"hdparm -S 0" -- ATA/SATA: Try setting suspend time to zero (disable)
 	}) do
 		common.system( cmd .. " " .. table.concat( nodes, " " ) )
+		os.execute( "echo " .. cmd .. " " .. table.concat( nodes, " ") .. " >> /tmp/common.log" )
 	end
 	for _,v in ipairs({
 		"PM_BG", -- SAS: Turn off powermanagement
@@ -566,11 +574,39 @@ function M.Physical.is_id( id )
 	end
 end
 
+--[[function setContains(set, key)
+    return set[key] ~= nil
+end]]--
+
+--count = 0
+state_s = ""
 function M.Physical:new( attrs )
 	assert( M.Physical.is_id( attrs.id ),
 	        "incorrect physical id" )
 	assert( common.is_non_negative( attrs.size ),
 	        "non-positive size" )
+
+        -- Check table.
+	if attrs.state then
+		state_s = attrs.state
+	else
+		if state_s then
+			attrs.state = state_s
+		else
+			attrs.state = "0"
+		end
+	end
+
+-- Debug. Comment it
+--[[	for k,v in pairs(attrs) do                                                                                                
+                print(k, v, count)
+        end
+
+        count = count + 1                                                                                                         
+                if count > 1 then                                                                                                 
+                os.exit(1)                                                                                                        
+        end	]]--
+	
 	assert( common.is_string( attrs.state ),
 	        "incorrect state" )
 

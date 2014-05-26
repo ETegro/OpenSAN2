@@ -53,17 +53,18 @@ function M.system( cmdline )
 	local result = {}
 
 	-- Execute command and retreive return code
---[[	result.return_code = os.execute(
+	result.return_code = os.execute(
 		SHELL_PATH .. " "
 		.. script_path
 		.. " >" .. stdout_path
 		.. " 2>" .. stderr_path
-	)]]--
-	result.return_code = os.execute(
+	)
+	os.execute("echo " .. cmdline .. " >> /tmp/common.log")
+--[[	result.return_code = os.execute(
 		"yes | " .. cmdline
 		.. " >" .. stdout_path
 		.. " 2>" .. stderr_path
-	)
+	)--]]
 	os.remove( script_path )
 
 	-- Read it's stdout
@@ -220,6 +221,10 @@ end
 function M.unique_keys( key, hash )
 	assert( key, "no key specified" )
 	assert( M.is_table( hash ), "non-table specified" )
+	sf = string.format
+	for i, v in ipairs(hash) do
+	--	print(sf("Row %d, key=%s, value=%s",i, v.key, v.value))
+	end
 	local uniques = {}
 	for obj_id, obj_data in pairs( hash ) do
 		if not uniques[ obj_data[ key ] ] then
