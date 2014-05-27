@@ -59,6 +59,7 @@ function M.system( cmdline )
 		.. " >" .. stdout_path
 		.. " 2>" .. stderr_path
 	)]]--
+	
 	result.return_code = os.execute(
 		"yes | " .. cmdline
 		.. " >" .. stdout_path
