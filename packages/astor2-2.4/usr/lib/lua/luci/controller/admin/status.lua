@@ -50,47 +50,85 @@ end
 hostname = luci.sys.hostname()
 function action_plots()
 local cpu = "rrdtool graph /var/www/luci-static/resources/cpu.png" .. 
-"  -e now  -s 'end - 24 hours'  -S 60 --title 'CPU USAGE' --vertical-label 'Percents' --imgformat PNG --slope-mode --lower-limit 0  --upper-limit 100  --rigid  -E  -i  --color SHADEA#FFFFFF  --color SHADEB#FFFFFF --color BACK#CCCCCC -w 1600 -h 300 --interlaced --font DEFAULT:8:/usr/local/share/rrdtool/fonts/ARIAL8.TTF DEF:a=/var/lib/collectd/rrd/" .. hostname .. "/cpu-0/cpu-idle.rrd:value:MAX DEF:b=/var/lib/collectd/rrd/" .. hostname .. "/cpu-0/cpu-system.rrd:value:MAX DEF:c=/var/lib/collectd/rrd/" .. hostname .. "/cpu-0/cpu-user.rrd:value:MAX LINE2:b#2cc320: AREA:b#54eb48:System LINE2:c#e7ad4a: AREA:c#ebd648:User >>/dev/null 2>>/dev/null;" 
+            " -e now " .. 
+            " -s 'end - 24 hours'" ..
+            " -S 60" ..  
+            " --title 'CPU USAGE'" .. 
+            " --vertical-label 'Percents'" ..
+            " --imgformat PNG"..
+            " --slope-mode" ..
+            " --lower-limit 0" .. 
+            " --upper-limit 100" .. 
+            " --rigid " ..
+            " -E " .. 
+            " -i " .. 
+            " --color SHADEA#FFFFFF " ..
+            " --color SHADEB#FFFFFF " .. 
+            " --color BACK#CCCCCC" .. 
+            " -w 1600" .. 
+            " -h 300 " .. 
+            " --interlaced" .. 
+            " DEF:a=/var/lib/collectd/rrd/" .. hostname .. "/cpu-0/cpu-idle.rrd:value:MAX" ..  
+            " DEF:b=/var/lib/collectd/rrd/" .. hostname .. "/cpu-0/cpu-system.rrd:value:MAX" .. 
+            " DEF:c=/var/lib/collectd/rrd/" .. hostname .. "/cpu-0/cpu-user.rrd:value:MAX" .. 
+            " LINE2:b#2cc320:AREA:b#54eb48:System " ..
+            " LINE2:c#e7ad4a:AREA:c#ebd648:User" .. 
+            " >>/dev/null 2>>/dev/null;" 
 
 
 local mem = "rrdtool graph /var/www/luci-static/resources/memory.png" .. 
-            " -e now -s 'end - 6 hours'  -S 60" ..
-            " --title 'MEMORY USAGE: TOTAL MEMORY: 16Gb'   --imgformat PNG --slope-mode    --lower-limit 0 --upper-limit 16000000000" .. 
-            " --rigid -E -i --color SHADEA#FFFFFF --color SHADEB#FFFFFF --color BACK#CCCCCC -w 1600  -h 300  --interlaced" ..  
-            " --font DEFAULT:8:/usr/local/share/rrdtool/fonts/ARIAL8.TTF".. 
+            " -e now " .. 
+            " -s 'end - 6 hours'" ..   
+            " -S 60" ..
+            " --title 'MEMORY USAGE: TOTAL MEMORY: 16Gb'"..  
+            " --imgformat PNG " ..
+            " --slope-mode " ..   
+            " --lower-limit 0 " ..
+            " --upper-limit 16000000000" .. 
+            " --rigid "..
+            " -E "..
+            " -i "..
+            " --color SHADEA#FFFFFF " .. 
+            " --color SHADEB#FFFFFF " .. 
+            " --color BACK#CCCCCC " ..
+            " -w 1600 " .. 
+            " -h 300" ..
+            " --interlaced" ..   
             " DEF:a=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-used.rrd:value:MAX" ..  
-            " LINE1:a#6959CD: AREA:a#6959CD:'Used memory' >>/dev/null 2>>/dev/null;"
+            " LINE1:a#6959CD: AREA:a#6959CD:'Used memory'" .. 
+            " >>/dev/null 2>>/dev/null;"
 
 
 
 local net = "rrdtool graph /var/www/luci-static/resources/network.png "..
-" -e now " ..
-" -s 'end - 6 hours' " ..
-" -S 60 "..
-" --title 'Traffic' "..
-" --vertical-label 'Mbyte/s' "..
-" --imgformat PNG "..
-" --slope-mode   "..
-" --lower-limit 0 "..
-" --upper-limit 110000500000 "..
-" --rigid "..
-" -E "..
-" -i "..
-" --color SHADEA#FFFFFF "..
-" --color SHADEB#FFFFFF "..
-" --color BACK#CCCCCC "..
-" -w 1600 "..
-" -h 300 "..
-" --interlaced "..
-" --font DEFAULT:8:/usr/local/share/rrdtool/fonts/ARIAL8.TTF "..
-" DEF:a=/var/lib/collectd/rrd/".. hostname .."/interface-eth0/if_packets.rrd:tx:MAX "..
-" DEF:b=/var/lib/collectd/rrd/".. hostname .."/interface-eth0/if_octets.rrd:rx:MAX "..
-" DEF:c=/var/lib/collectd/rrd/".. hostname .."/interface-eth0/if_errors.rrd:tx:MAX "..
-" LINE2:a#0000CD: "..
-" AREA:a#4169E1:Tx-transmited "..
-" LINE2:b#2cc320: "..
-" AREA:b#54eb48:Rx-receive "..
-" LINE1:c#FF0000:Errors >>/dev/null 2>>/dev/null;"
+            " -e now " ..
+            " -s 'end - 6 hours' " ..
+            " -S 60 "..
+            " --title 'Traffic' "..
+            " --vertical-label 'Mbyte/s' "..
+            " --imgformat PNG "..
+            " --slope-mode   "..
+            " --lower-limit 0 "..
+            " --upper-limit 110000500000 "..
+            " --rigid "..
+            " -E "..
+            " -i "..
+            " --color SHADEA#FFFFFF "..
+            " --color SHADEB#FFFFFF "..
+            " --color BACK#CCCCCC "..
+            " -w 1600 "..
+            " -h 300 "..
+            " --interlaced "..
+            " --font DEFAULT:8:/usr/local/share/rrdtool/fonts/ARIAL8.TTF "..
+            " DEF:a=/var/lib/collectd/rrd/".. hostname .."/interface-eth0/if_packets.rrd:tx:MAX "..
+            " DEF:b=/var/lib/collectd/rrd/".. hostname .."/interface-eth0/if_octets.rrd:rx:MAX "..
+            " DEF:c=/var/lib/collectd/rrd/".. hostname .."/interface-eth0/if_errors.rrd:tx:MAX "..
+            " LINE2:a#0000CD: "..
+            " AREA:a#4169E1:Tx-transmited "..
+            " LINE2:b#2cc320: "..
+            " AREA:b#54eb48:Rx-receive "..
+            " LINE1:c#FF0000:Errors" .. 
+            " >>/dev/null 2>>/dev/null;"
 
     common.system(cpu);
     common.system(mem);
