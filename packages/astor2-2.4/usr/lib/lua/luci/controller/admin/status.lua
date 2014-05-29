@@ -62,34 +62,34 @@ local mem = "rrdtool graph /var/www/luci-static/resources/memory.png" ..
 
 
 
-local net = "rrdtool graph /var/www/luci-static/resources/network.png "..
-" -e now " ..
-" -s 'end - 6 hours' " ..
-" -S 60 "..
-" --title 'Traffic' "..
-" --vertical-label 'Mbyte/s' "..
-" --imgformat PNG "..
-" --slope-mode   "..
-" --lower-limit 0 "..
-" --upper-limit 110000500000 "..
-" --rigid "..
-" -E "..
-" -i "..
-" --color SHADEA#FFFFFF "..
-" --color SHADEB#FFFFFF "..
-" --color BACK#CCCCCC "..
-" -w 1600 "..
-" -h 300 "..
-" --interlaced "..
-" --font DEFAULT:8:/usr/local/share/rrdtool/fonts/ARIAL8.TTF "..
-" DEF:a=/var/lib/collectd/rrd/ubuntu/interface-eth0/if_packets.rrd:tx:MAX "..
-" DEF:b=/var/lib/collectd/rrd/ubuntu/interface-eth0/if_octets.rrd:rx:MAX "..
-" DEF:c=/var/lib/collectd/rrd/ubuntu/interface-eth0/if_errors.rrd:tx:MAX "..
-" LINE2:a#0000CD: "..
-" AREA:a#4169E1:Tx-transmited "..
-" LINE2:b#2cc320: "..
-" AREA:b#54eb48:Rx-receive "..
-" LINE1:c#FF0000:Errors >>/dev/null 2>>/dev/null;"
+local net = " rrdtool graph /var/www/luci-static/resources/network.png " .. 
+  "  -e now " .. 
+  "  -s 'end - 6 hours' " .. 
+  "  -S 100 " .. 
+  "  --title 'Traffic on int_if: rl0 (100Mb/s)' " .. 
+  "  --vertical-label 'Mbytes' " .. 
+  "  --imgformat PNG " .. 
+  "  --slope-mode   " .. 
+  "  --lower-limit 0 " .. 
+  "  --upper-limit 120050000 " .. 
+  "  --rigid " .. 
+  "  -E " .. 
+  "  -i " .. 
+  "  --color SHADEA#FFFFFF " .. 
+  "  --color SHADEB#FFFFFF " .. 
+  "  --color BACK#CCCCCC " .. 
+  "  -w 1600 " .. 
+  "  -h 300 " .. 
+  "  --interlaced " .. 
+  "  --font DEFAULT:8:/usr/local/share/rrdtool/fonts/ARIAL8.TTF " .. 
+  "  DEF:a=/var/lib/collectd/rrd/ubuntu/interface-eth0/if_octets.rrd:tx:MAX " .. 
+  "  DEF:b=/var/lib/collectd/rrd/ubuntu/interface-eth0/if_octets.rrd:rx:MAX " .. 
+  "  DEF:c=/var/lib/collectd/rrd/ubuntu/interface-eth0/if_errors.rrd:tx:MAX " .. 
+  " LINE2:a#0000CD: " .. 
+  "  AREA:a#4169E1:Tx-transmit " .. 
+  " LINE2:b#2cc320: " .. 
+  " AREA:b#54eb48:Rx-receive " .. 
+  " LINE1:c#FF0000:Errors  >>/dev/null 2>>/dev/null;"
 
     common.system(cpu);
     common.system(mem);
