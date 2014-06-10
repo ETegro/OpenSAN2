@@ -101,13 +101,19 @@ local mem = "rrdtool graph /var/www/luci-static/resources/memory.png" ..
             " -w 400 " .. 
             " -h 300" ..
             " --interlaced" ..   
-            " --color CANVAS#2cD320 " ..
-            " DEF:a=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-cached.rrd:value:MAX" ..  
-            " DEF:b=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-used.rrd:value:MAX" ..  
+            --" --color CANVAS#2cD320 " ..
+            " DEF:mcached=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-cached.rrd:value:MAX" ..  
+            " DEF:mbuff=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-buffered.rrd:value:MAX" ..  
+            " DEF:mused=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-used.rrd:value:MAX" ..  
+            " DEF:mfree=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-free.rrd:value:MAX" ..  
+            " CDEF:buff=mused,mbuff,+ "..
+            " CDEF:cached=buff,mcached,+ "..
+            " CDEF:free=cached,mfree,+ "..
             " COMMENT:'\\n' " ..
-            " LINE1:a#0000FF: AREA:a#0000FF:'Cached memory' " .. 
-            " COMMENT:'\\n' " ..
-            " LINE1:b#aa0000: AREA:b#aa0000:'Used memory' " .. 
+            " LINE1:free#00FF00: AREA:free#00FF00:'Free memory' " .. 
+            " LINE1:cached#5500cc: AREA:cached#5500cc:'Cached memory' " .. 
+            " LINE1:buff#0000FF: AREA:buff#0000FF:'Buffered memory' " .. 
+            " LINE1:mused#FF0055: AREA:mused#aa0000:'Used memory' " .. 
             " COMMENT:'\\n' " ..
             " COMMENT:'FreeMem ".. string.format("%.2f", fmem/1024/1024) .." Gb' " ..
             " COMMENT:'\\n' " ..
