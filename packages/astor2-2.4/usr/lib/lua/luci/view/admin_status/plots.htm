@@ -32,7 +32,20 @@ $Id: bandwidth.htm 6583 2010-11-28 18:01:07Z jow $
 <h2><a id="content" name="content"><%:Plots%></a></h2>
 
 <center>
-<img style="width:500px; height:300px; border:1px solid #000000; background-color:#FFFFFF"  src="<%=resource%>/cpu.png" />
+<% num = cpunum:pcdata()/countproc:pcdata() %>
+    <% for i=1,countproc:pcdata() do %>
+        Cpu-<%= i %> 
+        <br />
+        <% startvalue = num*(i-1) %>
+
+            <% for j=startvalue+1,startvalue+num do %>
+            <img style="width:500px; height:300px; border:1px solid #000000; background-color:#FFFFFF"  src="<%=resource%>/cpu<%=j%>.png" />
+            <% end %>
+
+        <br />
+    <% end %>
+
+
 <img style="width:500px; height:300px; border:1px solid #000000; background-color:#FFFFFF"   src="<%=resource%>/memory.png" />
 <img style="width:500px; height:300px; border:1px solid #000000; background-color:#FFFFFF"   src="<%=resource%>/network.png" />
 </center>

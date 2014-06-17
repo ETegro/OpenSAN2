@@ -49,7 +49,20 @@ end
 
 hostname = luci.sys.hostname()
 function action_plots()
-local cpu = " rrdtool graph /var/www/luci-static/resources/cpu.png " .. 
+
+local lfs = require"lfs"
+
+local f = io.popen("grep 'physical id' /proc/cpuinfo | wc -l") 
+cpunum=string.gsub (f:read("*a") , '\n', '')
+
+
+local f = io.popen("grep 'physical id' /proc/cpuinfo | uniq | wc -l") 
+countproc=string.gsub (f:read("*a") , '\n', '')
+
+
+
+for i=0,cpunum-1 do
+local cpu = " rrdtool graph /var/www/luci-static/resources/cpu".. i+1 ..".png " .. 
             " -e now " .. 
             " -s 'end - 6 hours' " ..
             " -S 60" ..  
@@ -62,18 +75,23 @@ local cpu = " rrdtool graph /var/www/luci-static/resources/cpu.png " ..
             " --rigid " ..
             " -E " .. 
             " -i " .. 
+            --" --color CANVAS#8D8D8D " ..
             " --color SHADEA#FFFFFF " ..
             " --color SHADEB#FFFFFF " .. 
             " --color BACK#CCCCCC" .. 
             " -w 500 " .. 
             " -h 300 " .. 
             " --interlaced" .. 
-            " DEF:a=/var/lib/collectd/rrd/" .. hostname .. "/cpu-0/cpu-idle.rrd:value:MAX" ..  
-            " DEF:b=/var/lib/collectd/rrd/" .. hostname .. "/cpu-0/cpu-system.rrd:value:MAX" .. 
-            " DEF:c=/var/lib/collectd/rrd/" .. hostname .. "/cpu-0/cpu-user.rrd:value:MAX" .. 
+            " DEF:c=/var/lib/collectd/rrd/" .. hostname .. "/cpu-"..i.."/cpu-idle.rrd:value:MAX" ..  
+            " DEF:b=/var/lib/collectd/rrd/" .. hostname .. "/cpu-"..i.."/cpu-system.rrd:value:MAX" .. 
+            " DEF:a=/var/lib/collectd/rrd/" .. hostname .. "/cpu-"..i.."/cpu-user.rrd:value:MAX" .. 
+            " AREA:c#F7FF00:Idle " ..
             " LINE1:b#2cc320: AREA:b#54eb48:System " ..
-            " LINE1:c#e7ad4a: AREA:c#ebd648:User" .. 
+            " LINE1:a#200320: AREA:a#540048:User " ..
             " >>/dev/null 2>>/dev/null;" 
+
+common.system(cpu);
+end
 
 local totalmem = "cat /proc/meminfo | grep MemTotal | awk '{print $2}'"
 local freemem = "cat /proc/meminfo | grep MemFree | awk '{print $2}'"
@@ -85,12 +103,12 @@ fmem=string.gsub (f:read("*a") , '\n', '')
 local mem = "rrdtool graph /var/www/luci-static/resources/memory.png" .. 
             " -e now " .. 
             " -s 'end - 6 hours'" ..   
-            " -S 60" ..
+            " -S 60 " ..
             " --title 'MEMORY USAGE'"..  
             " --imgformat PNG " ..
             " --slope-mode " ..   
             " --lower-limit 0 " ..
-            " --upper-limit ".. tmem.."000" .. 
+            " --upper-limit ".. tmem.."000 " .. 
             " --base=1024 "..
             " --rigid "..
             " -E "..
@@ -99,13 +117,13 @@ local mem = "rrdtool graph /var/www/luci-static/resources/memory.png" ..
             " --color SHADEB#FFFFFF " .. 
             " --color BACK#CCCCCC " ..
             " -w 400 " .. 
-            " -h 300" ..
-            " --interlaced" ..   
+            " -h 300 " ..
+            " --interlaced " ..   
             --" --color CANVAS#2cD320 " ..
-            " DEF:mcached=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-cached.rrd:value:MAX" ..  
-            " DEF:mbuff=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-buffered.rrd:value:MAX" ..  
-            " DEF:mused=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-used.rrd:value:MAX" ..  
-            " DEF:mfree=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-free.rrd:value:MAX" ..  
+            " DEF:mcached=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-cached.rrd:value:MAX " ..  
+            " DEF:mbuff=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-buffered.rrd:value:MAX " ..  
+            " DEF:mused=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-used.rrd:value:MAX " ..  
+            " DEF:mfree=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-free.rrd:value:MAX " ..  
             " CDEF:buff=mused,mbuff,+ "..
             " CDEF:cached=buff,mcached,+ "..
             " CDEF:free=cached,mfree,+ "..
@@ -115,10 +133,10 @@ local mem = "rrdtool graph /var/www/luci-static/resources/memory.png" ..
             " LINE1:buff#0000FF: AREA:buff#0000FF:'Buffered memory' " .. 
             " LINE1:mused#FF0055: AREA:mused#aa0000:'Used memory' " .. 
             " COMMENT:'\\n' " ..
-            " COMMENT:'FreeMem ".. string.format("%.2f", fmem/1024/1024) .." Gb' " ..
+            " COMMENT:'FreeMem ".. string.format("%.3f", fmem/1024/1024) .." Gb' " ..
             " COMMENT:'\\n' " ..
-            " COMMENT:'TotalMem ".. string.format("%.2f", tmem/1024/1024) .." Gb' " ..
-            " >>/dev/null 2>>/dev/null;"
+            " COMMENT:'TotalMem ".. string.format("%.3f", tmem/1024/1024) .." Gb' " ..
+            " >>/dev/null 2>>/dev/null; "
 
 
 local net = "rrdtool graph /var/www/luci-static/resources/network.png "..
@@ -152,11 +170,10 @@ local net = "rrdtool graph /var/www/luci-static/resources/network.png "..
             " LINE1:c#FF0000:Errors" .. 
             " >>/dev/null 2>>/dev/null;"
 
-    common.system(cpu);
     common.system(mem);
     common.system(net);
     
-	luci.template.render("admin_status/plots", {plots=plots})
+	luci.template.render("admin_status/plots", {cpunum=cpunum,countproc=countproc})
 end
 
 function action_dmesg()
