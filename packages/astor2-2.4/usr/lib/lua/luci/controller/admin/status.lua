@@ -76,7 +76,7 @@ for i=0,cpunum-1 do
             " --rigid " ..
             " -E " .. 
             " -i " .. 
-            " --color CANVAS#8D8D8D " ..
+            " --color CANVAS#BBBBBB " ..
             " --color SHADEA#FFFFFF " ..
             " --color SHADEB#FFFFFF " .. 
             " --color BACK#CCCCCC" .. 
@@ -86,9 +86,11 @@ for i=0,cpunum-1 do
             " DEF:c=/var/lib/collectd/rrd/" .. hostname .. "/cpu-"..i.."/cpu-idle.rrd:value:MAX" ..  
             " DEF:b=/var/lib/collectd/rrd/" .. hostname .. "/cpu-"..i.."/cpu-system.rrd:value:MAX" .. 
             " DEF:a=/var/lib/collectd/rrd/" .. hostname .. "/cpu-"..i.."/cpu-user.rrd:value:MAX" .. 
+            " DEF:d=/var/lib/collectd/rrd/" .. hostname .. "/cpu-"..i.."/cpu-wait.rrd:value:MAX" .. 
             " AREA:c#F7FF00:Idle " ..
             " LINE1:a#200320: AREA:a#540048:User " ..
             " LINE1:b#2cc320: AREA:b#54eb48:System " ..
+            " LINE1:b#FF0000:Wait " ..
             " >>/dev/null 2>>/dev/null;" 
 
 common.system(cpu);
