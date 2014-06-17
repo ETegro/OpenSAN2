@@ -59,14 +59,15 @@ cpunum=string.gsub (f:read("*a") , '\n', '')
 local f = io.popen("grep 'physical id' /proc/cpuinfo | uniq | wc -l") 
 countproc=string.gsub (f:read("*a") , '\n', '')
 
+core=0
 
 
 for i=0,cpunum-1 do
-local cpu = " rrdtool graph /var/www/luci-static/resources/cpu".. i+1 ..".png " .. 
+  local cpu = " rrdtool graph /var/www/luci-static/resources/cpu".. i ..".png " .. 
             " -e now " .. 
             " -s 'end - 6 hours' " ..
             " -S 60" ..  
-            " --title 'CPU USAGE'" .. 
+            " --title 'CORE-" .. core.." USAGE'" .. 
             " --vertical-label 'Percents' " ..
             " --imgformat PNG"..
             " --slope-mode" ..
@@ -75,7 +76,7 @@ local cpu = " rrdtool graph /var/www/luci-static/resources/cpu".. i+1 ..".png " 
             " --rigid " ..
             " -E " .. 
             " -i " .. 
-            --" --color CANVAS#8D8D8D " ..
+            " --color CANVAS#8D8D8D " ..
             " --color SHADEA#FFFFFF " ..
             " --color SHADEB#FFFFFF " .. 
             " --color BACK#CCCCCC" .. 
@@ -86,11 +87,19 @@ local cpu = " rrdtool graph /var/www/luci-static/resources/cpu".. i+1 ..".png " 
             " DEF:b=/var/lib/collectd/rrd/" .. hostname .. "/cpu-"..i.."/cpu-system.rrd:value:MAX" .. 
             " DEF:a=/var/lib/collectd/rrd/" .. hostname .. "/cpu-"..i.."/cpu-user.rrd:value:MAX" .. 
             " AREA:c#F7FF00:Idle " ..
-            " LINE1:b#2cc320: AREA:b#54eb48:System " ..
             " LINE1:a#200320: AREA:a#540048:User " ..
+            " LINE1:b#2cc320: AREA:b#54eb48:System " ..
             " >>/dev/null 2>>/dev/null;" 
 
 common.system(cpu);
+
+core=core+1
+
+if (core==cpunum/countproc) then
+    core=0
+end
+
+
 end
 
 local totalmem = "cat /proc/meminfo | grep MemTotal | awk '{print $2}'"

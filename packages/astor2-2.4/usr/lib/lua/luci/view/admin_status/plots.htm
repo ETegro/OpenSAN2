@@ -33,12 +33,12 @@ $Id: bandwidth.htm 6583 2010-11-28 18:01:07Z jow $
 
 <center>
 <% num = cpunum:pcdata()/countproc:pcdata() %>
-    <% for i=1,countproc:pcdata() do %>
-        Cpu-<%= i %> 
+    <% for i=0,countproc:pcdata()-1 do %>
+        CPU-<%= i %> 
         <br />
-        <% startvalue = num*(i-1) %>
+        <% startvalue = num*i %>
 
-            <% for j=startvalue+1,startvalue+num do %>
+            <% for j=startvalue,startvalue+num-1 do %>
             <img style="width:500px; height:300px; border:1px solid #000000; background-color:#FFFFFF"  src="<%=resource%>/cpu<%=j%>.png" />
             <% end %>
 
