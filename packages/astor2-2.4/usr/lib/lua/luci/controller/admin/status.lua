@@ -63,6 +63,8 @@ core=0
 
 
 for i=0,cpunum-1 do
+    
+    common.system("rm /var/www/luci-static/resources/cpu".. i..".png");
   local cpu = " rrdtool graph /var/www/luci-static/resources/cpu".. i ..".png " .. 
             " -e now " .. 
             " -s 'end - 6 hours' " ..
@@ -76,7 +78,7 @@ for i=0,cpunum-1 do
             " --rigid " ..
             " -E " .. 
             " -i " .. 
-            " --color CANVAS#BBBBBB " ..
+            " --color CANVAS#EEEEEE " ..
             " --color SHADEA#FFFFFF " ..
             " --color SHADEB#FFFFFF " .. 
             " --color BACK#CCCCCC" .. 
@@ -107,10 +109,14 @@ end
 local totalmem = "cat /proc/meminfo | grep MemTotal | awk '{print $2}'"
 local freemem = "cat /proc/meminfo | grep MemFree | awk '{print $2}'"
 local f = io.popen(totalmem) 
-tmem=string.gsub (f:read("*a") , '\n', '')
+tmem=string.gsub (f:read("*a") , '\n', '')*1024
 local f = io.popen(freemem) 
 fmem=string.gsub (f:read("*a") , '\n', '')
 
+
+
+
+    common.system("rm /var/www/luci-static/resources/memory.png");
 local mem = "rrdtool graph /var/www/luci-static/resources/memory.png" .. 
             " -e now " .. 
             " -s 'end - 6 hours'" ..   
@@ -119,37 +125,42 @@ local mem = "rrdtool graph /var/www/luci-static/resources/memory.png" ..
             " --imgformat PNG " ..
             " --slope-mode " ..   
             " --lower-limit 0 " ..
-            " --upper-limit ".. tmem.."000 " .. 
+            " --upper-limit ".. tmem.." " .. 
             " --base=1024 "..
             " --rigid "..
             " -E "..
+            --" -M "..
             " -i "..
+            " --color CANVAS#EEEEEE " ..
             " --color SHADEA#FFFFFF " .. 
             " --color SHADEB#FFFFFF " .. 
             " --color BACK#CCCCCC " ..
             " -w 400 " .. 
             " -h 300 " ..
             " --interlaced " ..   
-            --" --color CANVAS#2cD320 " ..
+            --" HRULE:900#3333FF: AREA:900#3333FF:Total "..
             " DEF:mcached=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-cached.rrd:value:MAX " ..  
             " DEF:mbuff=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-buffered.rrd:value:MAX " ..  
             " DEF:mused=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-used.rrd:value:MAX " ..  
             " DEF:mfree=/var/lib/collectd/rrd/" .. hostname .. "/memory/memory-free.rrd:value:MAX " ..  
-            " CDEF:buff=mused,mbuff,+ "..
-            " CDEF:cached=buff,mcached,+ "..
-            " CDEF:free=cached,mfree,+ "..
+            " CDEF:bc=mbuff,mcached,+ "..
+            " CDEF:used=mused,bc,+ "..
+            " CDEF:free=used,mfree,+ "..
             " COMMENT:'\\n' " ..
-            " LINE1:free#00FF00: AREA:free#00FF00:'Free memory' " .. 
-            " LINE1:cached#5500cc: AREA:cached#5500cc:'Cached memory' " .. 
-            " LINE1:buff#0000FF: AREA:buff#0000FF:'Buffered memory' " .. 
-            " LINE1:mused#FF0055: AREA:mused#aa0000:'Used memory' " .. 
+            " AREA:free#00FF00:'Total memory' " .. 
+            " AREA:mcached#5500cc:'Cached memory' " .. 
+            " AREA:mused#aa0000:'Used memory' " .. 
+            " AREA:mbuff#0044FF:'Buffered memory' " .. 
+            " LINE1:free#00FF00 "..
+            " LINE1:mused#FF0055 " .. 
             " COMMENT:'\\n' " ..
             " COMMENT:'FreeMem ".. string.format("%.3f", fmem/1024/1024) .." Gb' " ..
             " COMMENT:'\\n' " ..
-            " COMMENT:'TotalMem ".. string.format("%.3f", tmem/1024/1024) .." Gb' " ..
+            " COMMENT:'TotalMem ".. string.format("%.3f", tmem/1024/1024/1024) .." Gb' " ..
             " >>/dev/null 2>>/dev/null; "
 
 
+    common.system("rm /var/www/luci-static/resources/network.png");
 local net = "rrdtool graph /var/www/luci-static/resources/network.png "..
             " -e now " ..
             " -s 'end - 6 hours' " ..
@@ -168,6 +179,7 @@ local net = "rrdtool graph /var/www/luci-static/resources/network.png "..
             " --color SHADEA#FFFFFF "..
             " --color SHADEB#FFFFFF "..
             " --color BACK#CCCCCC "..
+            " --color CANVAS#EEEEEE " ..
             " -w 400 "..
             " -h 300 "..
             " --interlaced "..
